@@ -40,8 +40,7 @@ function App() {
             <div className="hidden md:flex items-center gap-8">
               <a href="#" className="text-gray-700 hover:text-primary-600 font-medium transition">Home</a>
               <a href="#about" className="text-gray-700 hover:text-primary-600 font-medium transition">About</a>
-              <a href="#services" className="text-gray-700 hover:text-primary-600 font-medium transition">Services</a>
-              <a href="#treatments" className="text-gray-700 hover:text-primary-600 font-medium transition">Treatments</a>
+              <a href="#treatments" className="text-gray-700 hover:text-primary-600 font-medium transition">Popular Treatments</a>
               <a href="#contact" className="text-gray-700 hover:text-primary-600 font-medium transition">Contact</a>
               <a href="#appointment" className="bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition font-medium">
                 Book Appointment
@@ -64,8 +63,7 @@ function App() {
             <div className="px-4 py-4 space-y-3">
               <a href="#" className="block text-gray-700 hover:text-primary-600 font-medium">Home</a>
               <a href="#about" className="block text-gray-700 hover:text-primary-600 font-medium">About</a>
-              <a href="#services" className="block text-gray-700 hover:text-primary-600 font-medium">Services</a>
-              <a href="#treatments" className="block text-gray-700 hover:text-primary-600 font-medium">Treatments</a>
+              <a href="#treatments" className="block text-gray-700 hover:text-primary-600 font-medium">Popular Treatments</a>
               <a href="#contact" className="block text-gray-700 hover:text-primary-600 font-medium">Contact</a>
               <a href="#appointment" className="block bg-primary-600 text-white px-6 py-2 rounded-full text-center hover:bg-primary-700 transition font-medium">
                 Book Appointment
@@ -113,149 +111,37 @@ function App() {
         </div>
       </section>
 
-      {/* Services Highlight Section */}
-      <section id="services" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Specialized Services</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Advanced dermatology treatments with cutting-edge technology</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Allergy Test in Kathmandu',
-                description: 'Comprehensive allergy testing including patch and prick tests for accurate diagnosis',
-                icon: '🧪',
-                cta: 'Learn More'
-              },
-              {
-                title: 'Laser Hair Removal',
-                description: 'Advanced laser technology for permanent hair reduction with minimal discomfort',
-                icon: '✨',
-                cta: 'Know More'
-              },
-              {
-                title: 'GFC Therapy',
-                description: 'Growth Factor Concentrate therapy for hair loss and skin rejuvenation',
-                icon: '💉',
-                cta: 'Know More'
-              },
-              {
-                title: 'Anti-Aging Treatment',
-                description: 'Advanced treatments to reduce wrinkles and restore youthful skin',
-                icon: '🌟',
-                cta: 'Know More'
-              },
-              {
-                title: 'STD Checkup & Treatment',
-                description: 'Confidential and comprehensive STD testing and treatment services',
-                icon: '🔬',
-                cta: 'Know More'
-              },
-              {
-                title: 'Acne Treatment',
-                description: 'Effective acne solutions for clear, healthy skin',
-                icon: '🧴',
-                cta: 'Know More'
-              }
-            ].map((service, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-8 hover:shadow-xl transition group">
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <button className="text-primary-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
-                  {service.cta} <ChevronRight size={18} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Popular Treatments */}
-      <section id="treatments" className="py-20 bg-gradient-to-br from-primary-50 to-white">
+      <section id="treatments" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Treatments</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Most sought-after dermatology treatments</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { name: 'Melasma Treatment', image: '🌅' },
-              { name: 'Acne Treatment', image: '✨' },
-              { name: 'Allergy Test & Treatment', image: '🧪' },
-              { name: 'Wart Removal', image: '🎯' },
-              { name: 'STD Testing & Treatment', image: '🔬' },
-              { name: 'Hydrafacial', image: '💧' },
-              { name: 'PRP/Growth Factor', image: '💉' },
-              { name: 'Chemical Peeling', image: '🧴' }
-            ].map((treatment, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition cursor-pointer">
-                <div className="text-5xl mb-4 text-center">{treatment.image}</div>
-                <h3 className="font-semibold text-gray-900 text-center">{treatment.name}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* All Treatments */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">All Kinds of Dermatology Treatment</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Comprehensive skin care solutions for all conditions</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {[
-              'Allergy Testing (Patch/Prick)',
-              'Vitiligo Treatment',
-              'Fungal Infection Treatment',
-              'STD Testing & Treatment',
-              'Growth Factor Injection (GFC)',
-              'Laser Hair Removal'
-            ].map((treatment, index) => (
-              <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-primary-50 transition cursor-pointer">
-                <CheckCircle className="text-primary-600" size={20} />
-                <span className="text-gray-700 font-medium">{treatment}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <button className="bg-primary-600 text-white px-8 py-3 rounded-full hover:bg-primary-700 transition font-medium">
-              Book Appointment
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Treatment Categories */}
-      <section className="py-20 bg-gradient-to-br from-accent-50 to-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Pick Your Treatment</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Choose from our wide range of specialized treatments</p>
+            <p className="text-gray-600 max-w-2xl mx-auto">Comprehensive dermatology treatments with cutting-edge technology</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Face Treatments', description: 'Rejuvenate your facial skin', icon: '😊' },
-              { title: 'Skin Treatments', description: 'Comprehensive skin care', icon: '🧴' },
-              { title: 'Chemical Peeling', description: 'Renew your skin', icon: '✨' },
-              { title: 'HydraFacial', description: 'Deep cleansing treatment', icon: '💧' },
-              { title: 'Laser Hair Removal', description: 'Permanent hair reduction', icon: '🔥' },
-              { title: 'Hair Loss & GFC Therapy', description: 'Restore hair growth', icon: '💇' }
-            ].map((category, index) => (
-              <div key={index} className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition group cursor-pointer">
-                <div className="text-5xl mb-4">{category.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{category.title}</h3>
-                <p className="text-gray-600 mb-4">{category.description}</p>
-                <button className="text-primary-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Explore Now <ChevronRight size={18} />
+              { title: 'Laser Treatment', description: 'Uses laser technology for skin problems like pigmentation, scars, hair removal, etc.', icon: '⚡' },
+              { title: 'Hair Transplant', description: 'Surgical procedure to restore hair in bald areas.', icon: '💇' },
+              { title: 'Allergy Test', description: 'Test to identify substances causing skin allergies.', icon: '🧪' },
+              { title: 'Botox and Fillers', description: 'Cosmetic treatments to reduce wrinkles and add volume to the face.', icon: '✨' },
+              { title: 'Cryotherapy', description: 'Treatment that uses extreme cold to remove skin lesions like warts.', icon: '❄️' },
+              { title: 'Chemical Peeling', description: 'Chemical solution applied to improve skin texture and remove damaged skin.', icon: '🧴' },
+              { title: 'Mole Removal', description: 'Procedure to remove unwanted moles or skin growths.', icon: '🔬' },
+              { title: 'Teledermatology', description: 'Online or remote consultation with dermatologists using digital technology.', icon: '💻' },
+              { title: 'PRP Therapy', description: 'Uses patient’s blood plasma to stimulate hair growth or skin repair.', icon: '💉' },
+              { title: 'Cosmetic Surgery', description: 'Procedures to improve physical appearance.', icon: '🏥' },
+              { title: 'Skin Analyzer', description: 'Device used to analyze skin condition (oil, moisture, pigmentation, etc.).', icon: '📊' },
+              { title: 'ZSR Circumcision', description: 'A surgical method for circumcision using a stapler technique.', icon: '⚕️' },
+              { title: 'Photo Therapy', description: 'Light-based treatment used for skin diseases like psoriasis or eczema.', icon: '💡' },
+              { title: 'Vitiligo Surgery', description: 'Surgical treatments to restore skin pigment in vitiligo patients.', icon: '🎨' }
+            ].map((service, index) => (
+              <div key={index} className="bg-gray-50 rounded-xl p-8 hover:shadow-xl transition group flex flex-col h-full">
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                <p className="text-gray-600 mb-6 flex-grow">{service.description}</p>
+                <button className="text-primary-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all mt-auto w-fit">
+                  Learn More <ChevronRight size={18} />
                 </button>
               </div>
             ))}
