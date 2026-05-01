@@ -1,15 +1,28 @@
 /* ── Hero text cycling ──────────────────────────────────────── */
 const cycleItems = ['Allergy Testing','Laser Hair Removal','GFC Therapy','Anti-Aging Treatment','STD Checkup','Acne Treatment','Chemical Peeling'];
-const ITEM_H = 32; // must match .hero-cycle-inner span height in CSS
+const ITEM_H = 32;
 let cycleIdx = 0;
 function initCycler() {
   const inner = document.getElementById('hero-cycle-inner');
   if (!inner) return;
-  inner.innerHTML = cycleItems.map(t => `<span>${t}</span>`).join('');
-  inner.style.transform = 'translateY(0)'; // force initial state
+  // Clone first item to end for seamless loop
+  const items = [...cycleItems, cycleItems[0]];
+  inner.innerHTML = items.map(t => `<span>${t}</span>`).join('');
+  inner.style.transform = 'translateY(0)';
+
   setInterval(() => {
-    cycleIdx = (cycleIdx + 1) % cycleItems.length;
+    cycleIdx++;
+    inner.style.transition = 'transform .55s cubic-bezier(.4,0,.2,1)';
     inner.style.transform = `translateY(-${cycleIdx * ITEM_H}px)`;
+
+    // When we hit the clone (the end), jump back to start instantly
+    if (cycleIdx === cycleItems.length) {
+      setTimeout(() => {
+        inner.style.transition = 'none';
+        inner.style.transform = 'translateY(0)';
+        cycleIdx = 0;
+      }, 600); // slightly longer than the transition duration
+    }
   }, 2400);
 }
 const treatments = [
