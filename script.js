@@ -6,6 +6,7 @@ function initCycler() {
   const inner = document.getElementById('hero-cycle-inner');
   if (!inner) return;
   inner.innerHTML = cycleItems.map(t => `<span>${t}</span>`).join('');
+  inner.style.transform = 'translateY(0)'; // force initial state
   setInterval(() => {
     cycleIdx = (cycleIdx + 1) % cycleItems.length;
     inner.style.transform = `translateY(-${cycleIdx * ITEM_H}px)`;

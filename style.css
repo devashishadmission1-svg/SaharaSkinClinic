@@ -156,6 +156,9 @@ section{padding:5rem 0}
   height: 32px;
   line-height: 32px;
   display: block;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
 }
 /* CTA row */
 .hero-ctas {
