@@ -1,4 +1,16 @@
-/* ── Treatment data ─────────────────────────────────────────── */
+/* ── Hero text cycling ──────────────────────────────────────── */
+const cycleItems = ['Allergy Testing','Laser Hair Removal','GFC Therapy','Anti-Aging Treatment','STD Checkup','Acne Treatment','Chemical Peeling'];
+const ITEM_H = 32; // must match .hero-cycle-inner span height in CSS
+let cycleIdx = 0;
+function initCycler() {
+  const inner = document.getElementById('hero-cycle-inner');
+  if (!inner) return;
+  inner.innerHTML = cycleItems.map(t => `<span>${t}</span>`).join('');
+  setInterval(() => {
+    cycleIdx = (cycleIdx + 1) % cycleItems.length;
+    inner.style.transform = `translateY(-${cycleIdx * ITEM_H}px)`;
+  }, 2400);
+}
 const treatments = [
   { title:'Laser Treatment', desc:'Uses laser technology for pigmentation, scars, hair removal and skin resurfacing.',
     icon:'<path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>' },
@@ -65,19 +77,6 @@ function renderReviews() {
       <p class="reviewer-name">${r.name}</p>
       <p style="font-size:.8rem;color:var(--text-muted)">${r.role}</p>
     </div>`).join('');
-}
-
-/* ── Hero text cycling ──────────────────────────────────────── */
-const cycleItems = ['Allergy Testing','Laser Hair Removal','GFC Therapy','Anti-Aging Treatment','STD Checkup','Acne Treatment','Chemical Peeling'];
-let cycleIdx = 0;
-function initCycler() {
-  const inner = document.getElementById('hero-cycle-inner');
-  if (!inner) return;
-  inner.innerHTML = cycleItems.map(t => `<span>${t}</span>`).join('');
-  setInterval(() => {
-    cycleIdx = (cycleIdx + 1) % cycleItems.length;
-    inner.style.transform = `translateY(-${cycleIdx * 1.25}em)`;
-  }, 2200);
 }
 
 /* ── Sticky nav ─────────────────────────────────────────────── */
