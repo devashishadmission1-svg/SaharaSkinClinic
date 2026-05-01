@@ -26,12 +26,12 @@ function initCycler() {
 function initMarquee() {
   const track = document.querySelector('.hero-marquee-track');
   if (!track) return;
-  // Repeat items for seamless loop
   const html = marqueeItems.map(item => `
     <span class="marquee-item"><span class="marquee-dot"></span>${item}</span>
   `).join('');
   track.innerHTML = html + html;
 }
+
 const treatments = [
   { title:'Laser Treatment', desc:'Uses laser technology for pigmentation, scars, hair removal and skin resurfacing.',
     icon:'<path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>' },
@@ -64,12 +64,11 @@ const treatments = [
 ];
 
 const reviews = [
-  { text:'Excellent service and professional care. Dr. Dhakal is truly amazing — I felt at ease from the first consultation!', name:'Sarah M.', role:'Laser Treatment Patient' },
-  { text:'Best laser hair removal experience in Kathmandu. Highly recommended! The results exceeded my expectations.', name:'Rajesh K.', role:'Hair Removal Patient' },
-  { text:'Finally found a solution for my chronic acne. Thank you Sahara Skin Clinic — my confidence is back!', name:'Priya S.', role:'Acne Treatment Patient' }
+  { text:'Excellent service and professional care. Dr. Dhakal is truly amazing!', name:'Sarah M.', role:'Laser Treatment Patient' },
+  { text:'Best laser hair removal experience in Kathmandu. Highly recommended!', name:'Rajesh K.', role:'Hair Removal Patient' },
+  { text:'Finally found a solution for my chronic acne. Thank you Sahara!', name:'Priya S.', role:'Acne Treatment Patient' }
 ];
 
-/* ── Render treatments ──────────────────────────────────────── */
 function renderTreatments() {
   const grid = document.getElementById('treatments-grid');
   if (!grid) return;
@@ -86,7 +85,6 @@ function renderTreatments() {
     </div>`).join('');
 }
 
-/* ── Render reviews ─────────────────────────────────────────── */
 function renderReviews() {
   const grid = document.getElementById('reviews-grid');
   if (!grid) return;
@@ -100,14 +98,12 @@ function renderReviews() {
     </div>`).join('');
 }
 
-/* ── Sticky nav ─────────────────────────────────────────────── */
 function initNavScroll() {
   const nav = document.getElementById('main-nav');
   if (!nav) return;
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
 }
 
-/* ── Active nav link ────────────────────────────────────────── */
 function initActiveNav() {
   const links = document.querySelectorAll('.nav-link[data-section]');
   if (!links.length) return;
@@ -123,7 +119,6 @@ function initActiveNav() {
   document.querySelectorAll('section[id]').forEach(s => io.observe(s));
 }
 
-/* ── Mobile menu ────────────────────────────────────────────── */
 function initMobileMenu() {
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
@@ -144,7 +139,6 @@ function initMobileMenu() {
   }));
 }
 
-/* ── Scroll reveal ──────────────────────────────────────────── */
 function initReveal() {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }});
@@ -152,7 +146,6 @@ function initReveal() {
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 }
 
-/* ── Back to Top ────────────────────────────────────────────── */
 function initBackToTop() {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;
@@ -160,7 +153,6 @@ function initBackToTop() {
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-/* ── Contact form → Formspree ───────────────────────────────── */
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -179,7 +171,6 @@ function initContactForm() {
   });
 }
 
-/* ── Smooth scroll ──────────────────────────────────────────── */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
@@ -191,7 +182,6 @@ function initSmoothScroll() {
   });
 }
 
-/* ── Boot ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   renderTreatments();
   renderReviews();
@@ -204,6 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initContactForm();
   initSmoothScroll();
-  // Re-observe after dynamic render
   setTimeout(initReveal, 50);
+  console.log("Sahara Skin Clinic — Modernized v2.0.0");
 });
