@@ -82,46 +82,104 @@
 <section id="hero">
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
-  <div class="hero-orb hero-orb-3"></div>
-  <div class="container" style="position:relative;z-index:1;text-align:center">
-    <div class="hero-glass" style="padding:3rem 2rem;max-width:800px;margin:0 auto">
-      <span class="section-eyebrow reveal" style="color:var(--rose-gold-light)">Dr. Prabin Dhakal · HOD of Dermatology</span>
-      <h1 class="reveal reveal-delay-1" style="font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.15;margin:.75rem 0 1rem">
-        Best Dermatologist &amp; Skin Clinic<br>in Kathmandu, Nepal
+
+  <!-- Split grid -->
+  <div class="container hero-grid">
+
+    <!-- Left: editorial text -->
+    <div class="hero-text-col">
+      <span class="hero-kicker">Sahara Skin Clinic · Swoyambhu, Kathmandu</span>
+
+      <h1 class="hero-h1 reveal">
+        Skin that tells<br>
+        your best <em>story.</em>
       </h1>
-      <p class="reveal reveal-delay-2" style="color:rgba(255,255,255,.7);font-size:1.05rem;margin-bottom:.5rem">Specialising in</p>
-      <div class="reveal reveal-delay-2" style="margin-bottom:2rem;font-size:1.25rem;font-weight:600">
+
+      <p class="hero-sub reveal reveal-delay-1">
+        Expert dermatological care by Dr. Prabin Dhakal — HOD of Dermatology,
+        specialising in laser, aesthetic &amp; clinical skin treatments.
+      </p>
+
+      <!-- Cycling service -->
+      <div class="hero-service-line reveal reveal-delay-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="var(--rose-gold)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Currently offering:&nbsp;
         <div class="hero-cycle-wrap"><div class="hero-cycle-inner" id="hero-cycle-inner"></div></div>
       </div>
-      <div class="reveal reveal-delay-3" style="display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-bottom:2.5rem">
-        <span class="service-pill">Allergy Testing</span>
-        <span class="service-pill">Laser Hair Removal</span>
-        <span class="service-pill">GFC Therapy</span>
-        <span class="service-pill">Anti-Aging</span>
-        <span class="service-pill">STD Checkup</span>
-        <span class="service-pill">Acne Treatment</span>
-      </div>
-      <div class="reveal reveal-delay-4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
+
+      <!-- CTAs -->
+      <div class="hero-ctas reveal reveal-delay-3">
         <a href="#appointment" class="btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
           Book Appointment
         </a>
         <a href="#services" class="btn-secondary">View Treatments</a>
       </div>
+
+      <!-- Stats -->
+      <div class="hero-stats reveal reveal-delay-4">
+        <div>
+          <div class="hero-stat-num">6<span>+</span></div>
+          <div class="hero-stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">14<span>+</span></div>
+          <div class="hero-stat-label">Treatments</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">5K<span>+</span></div>
+          <div class="hero-stat-label">Patients Treated</div>
+        </div>
+      </div>
     </div>
-    <div class="reveal reveal-delay-5" style="display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem;margin-top:3rem">
-      <div style="text-align:center;color:rgba(255,255,255,.85)">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--rose-gold-light)">6+</div>
-        <div style="font-size:.8rem;margin-top:.25rem">Years Experience</div>
+
+    <!-- Right: doctor photo -->
+    <div class="hero-photo-col reveal reveal-delay-2">
+      <div class="hero-photo-frame">
+        <!-- Verified badge -->
+        <div class="hero-verified">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          Board Certified
+        </div>
+        <img src="DrPrabin.jpg" alt="Dr. Prabin Dhakal — HOD of Dermatology, Sahara Skin Clinic" class="hero-photo-img" loading="eager"/>
+        <!-- Floating name card -->
+        <div class="hero-name-card">
+          <p>Dr. Prabin Dhakal</p>
+          <p>HOD · Dermatology, Manmohan Memorial Medical College</p>
+        </div>
       </div>
-      <div style="text-align:center;color:rgba(255,255,255,.85)">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--rose-gold-light)">14+</div>
-        <div style="font-size:.8rem;margin-top:.25rem">Treatments</div>
-      </div>
-      <div style="text-align:center;color:rgba(255,255,255,.85)">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--rose-gold-light)">5000+</div>
-        <div style="font-size:.8rem;margin-top:.25rem">Happy Patients</div>
-      </div>
+    </div>
+
+  </div>
+
+  <!-- Marquee service strip -->
+  <div class="hero-marquee-strip">
+    <div class="hero-marquee-track">
+      <!-- repeated twice for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot"></span>Allergy Testing</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Laser Hair Removal</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>GFC Therapy</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Chemical Peeling</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Botox &amp; Fillers</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>STD Checkup</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Acne Treatment</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>PRP Therapy</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Cryotherapy</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Mole Removal</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Vitiligo Surgery</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Photo Therapy</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Allergy Testing</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Laser Hair Removal</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>GFC Therapy</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Chemical Peeling</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Botox &amp; Fillers</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>STD Checkup</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Acne Treatment</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>PRP Therapy</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Cryotherapy</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Mole Removal</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Vitiligo Surgery</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Photo Therapy</span>
     </div>
   </div>
 </section>
