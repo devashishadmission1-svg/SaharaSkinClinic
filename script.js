@@ -1,29 +1,36 @@
-/* ── Hero text cycling ──────────────────────────────────────── */
 const cycleItems = ['Allergy Testing','Laser Hair Removal','GFC Therapy','Anti-Aging Treatment','STD Checkup','Acne Treatment','Chemical Peeling'];
+const marqueeItems = ['Allergy Testing','Laser Hair Removal','GFC Therapy','Chemical Peeling','Botox & Fillers','STD Checkup','Acne Treatment','PRP Therapy','Cryotherapy','Mole Removal','Vitiligo Surgery','Photo Therapy'];
 const ITEM_H = 32;
 let cycleIdx = 0;
+
 function initCycler() {
   const inner = document.getElementById('hero-cycle-inner');
   if (!inner) return;
-  // Clone first item to end for seamless loop
   const items = [...cycleItems, cycleItems[0]];
   inner.innerHTML = items.map(t => `<span>${t}</span>`).join('');
   inner.style.transform = 'translateY(0)';
-
   setInterval(() => {
     cycleIdx++;
     inner.style.transition = 'transform .55s cubic-bezier(.4,0,.2,1)';
     inner.style.transform = `translateY(-${cycleIdx * ITEM_H}px)`;
-
-    // When we hit the clone (the end), jump back to start instantly
     if (cycleIdx === cycleItems.length) {
       setTimeout(() => {
         inner.style.transition = 'none';
         inner.style.transform = 'translateY(0)';
         cycleIdx = 0;
-      }, 600); // slightly longer than the transition duration
+      }, 600);
     }
   }, 2400);
+}
+
+function initMarquee() {
+  const track = document.querySelector('.hero-marquee-track');
+  if (!track) return;
+  // Repeat items for seamless loop
+  const html = marqueeItems.map(item => `
+    <span class="marquee-item"><span class="marquee-dot"></span>${item}</span>
+  `).join('');
+  track.innerHTML = html + html;
 }
 const treatments = [
   { title:'Laser Treatment', desc:'Uses laser technology for pigmentation, scars, hair removal and skin resurfacing.',
@@ -189,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTreatments();
   renderReviews();
   initCycler();
+  initMarquee();
   initNavScroll();
   initActiveNav();
   initMobileMenu();
