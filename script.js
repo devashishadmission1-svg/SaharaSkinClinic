@@ -1,4 +1,4 @@
-const cycleItems = ['Laser Treatment','Hair Transplant','Allergy Test','Botox and Fillers','Cryotherapy','Chemical Peeling','Mole Removal'];
+const cycleItems = ['Laser Treatment','Hair Transplant','Allergy Test','Botox and Fillers','Cryotherapy','Chemical Peeling','Mole Removal','Teledermatology','PRP Therapy','Cosmetic Surgery','Skin Analyzer','ZSR Circumcision','Photo Therapy','Vitiligo Surgery'];
 const marqueeItems = ['Laser Treatment','Hair Transplant','Allergy Test','Botox and Fillers','Cryotherapy','Chemical Peeling','Mole Removal','Teledermatology','PRP Therapy','Cosmetic Surgery','Skin Analyzer','ZSR Circumcision','Photo Therapy','Vitiligo Surgery'];
 const ITEM_H = 32;
 let cycleIdx = 0;
