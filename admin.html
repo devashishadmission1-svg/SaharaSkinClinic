@@ -1552,6 +1552,21 @@
       `).join('');
     }
 
+    // Sync Public Status Registry (Customer-safe lookup, hides personal details)
+    function syncPublicRegistry() {
+      const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      const publicRegistry = {};
+      bookings.forEach(b => {
+        publicRegistry[b.id.toUpperCase()] = {
+          status: b.status,
+          treatment: b.treatment,
+          date: b.date,
+          time: b.time
+        };
+      });
+      localStorage.setItem('sahara_public_status', JSON.stringify(publicRegistry));
+    }
+
     // Update Status
     function updateBookingStatus(id, newStatus) {
       const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
@@ -1559,6 +1574,7 @@
       if (index !== -1) {
         bookings[index].status = newStatus;
         localStorage.setItem('sahara_bookings', JSON.stringify(bookings));
+        syncPublicRegistry();
         
         refreshKPIs();
         renderAdminBookings();
@@ -1573,6 +1589,7 @@
         let bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
         bookings = bookings.filter(b => b.id !== id);
         localStorage.setItem('sahara_bookings', JSON.stringify(bookings));
+        syncPublicRegistry();
         
         refreshKPIs();
         renderAdminBookings();
@@ -1740,6 +1757,7 @@
 
       list.unshift(newBooking);
       localStorage.setItem('sahara_bookings', JSON.stringify(list));
+      syncPublicRegistry();
 
       refreshKPIs();
       renderAdminBookings();
@@ -1839,6 +1857,7 @@
       if (confirm("CRITICAL ACTION: Are you sure you want to permanently clear all booking database records and contact inquiry logs? This cannot be undone.")) {
         localStorage.setItem('sahara_bookings', '[]');
         localStorage.setItem('sahara_messages', '[]');
+        localStorage.setItem('sahara_public_status', '{}');
         refreshKPIs();
         renderAdminBookings();
         renderAdminMessages();
@@ -1851,6 +1870,7 @@
       if (confirm("Wipe active records and reload default sample mock databases?")) {
         localStorage.removeItem('sahara_bookings');
         localStorage.removeItem('sahara_messages');
+        localStorage.removeItem('sahara_public_status');
         
         // This triggers the default data inside initMockData in script.js, which we reload here
         window.location.reload();
@@ -1891,6 +1911,7 @@
 
       bookings.unshift(newBooking);
       localStorage.setItem('sahara_bookings', JSON.stringify(bookings));
+      syncPublicRegistry();
       
       refreshKPIs();
       renderAdminBookings();

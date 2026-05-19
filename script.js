@@ -248,9 +248,19 @@ function initBookingForm() {
         createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Pending'
       };
-      
-      list.unshift(newBooking);
+         list.unshift(newBooking);
       localStorage.setItem('sahara_bookings', JSON.stringify(list));
+      
+      // Save to customer-safe public registry (hides patient personal information)
+      const publicRegistry = JSON.parse(localStorage.getItem('sahara_public_status') || '{}');
+      publicRegistry[refId.toUpperCase()] = {
+        status: 'Pending',
+        treatment,
+        date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+        time
+      };
+      localStorage.setItem('sahara_public_status', JSON.stringify(publicRegistry));
+      
       localStorage.setItem('sahara_last_booking_id', refId);
       if (typeof renderTrackerHelper === 'function') {
         renderTrackerHelper();
@@ -286,10 +296,10 @@ function initMockData() {
         phone: '9841234567',
         email: 'devashish@example.com',
         treatment: 'Laser Treatment',
-        date: new Date(Date.now() + 86400000 * 2).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }), // 2 days in future
+        date: new Date(Date.now() + 86400000 * 2).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         time: 'Afternoon',
         notes: 'Interested in laser resurfacing for minor acne scars.',
-        createdAt: new Date(Date.now() - 3600000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }), // 3 hours ago
+        createdAt: new Date(Date.now() - 3600000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Confirmed'
       },
       {
@@ -298,10 +308,10 @@ function initMockData() {
         phone: '9801122334',
         email: 'aayusha.s@domain.com',
         treatment: 'Allergy Test',
-        date: new Date(Date.now() + 86400000 * 4).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }), // 4 days in future
+        date: new Date(Date.now() + 86400000 * 4).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         time: 'Morning',
         notes: 'Allergy patches for sensitive skin testing.',
-        createdAt: new Date(Date.now() - 3600000 * 12).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }), // 12 hours ago
+        createdAt: new Date(Date.now() - 3600000 * 12).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Pending'
       },
       {
@@ -310,10 +320,10 @@ function initMockData() {
         phone: '9851098765',
         email: 'rohan.basnet@live.com',
         treatment: 'PRP Therapy',
-        date: new Date(Date.now() + 86400000 * 1).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }), // tomorrow
+        date: new Date(Date.now() + 86400000 * 1).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         time: 'Evening',
         notes: 'PRP session for hair thinning.',
-        createdAt: new Date(Date.now() - 3600000 * 24).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }), // 24 hours ago
+        createdAt: new Date(Date.now() - 3600000 * 24).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Pending'
       },
       {
@@ -322,14 +332,29 @@ function initMockData() {
         phone: '9813456789',
         email: 'sita.k@gmail.com',
         treatment: 'Chemical Peeling',
-        date: new Date(Date.now() - 86400000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }), // 3 days ago
+        date: new Date(Date.now() - 86400000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         time: 'Afternoon',
         notes: 'Follow-up chemical peeling appointment.',
-        createdAt: new Date(Date.now() - 86400000 * 5).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }), // 5 days ago
+        createdAt: new Date(Date.now() - 86400000 * 5).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Completed'
       }
     ];
     localStorage.setItem('sahara_bookings', JSON.stringify(mockBookings));
+  }
+  
+  // Safe Lookup Initializer (Decouples personal info from tracking screen lookup)
+  if (!localStorage.getItem('sahara_public_status')) {
+    const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+    const publicRegistry = {};
+    bookings.forEach(b => {
+      publicRegistry[b.id.toUpperCase()] = {
+        status: b.status,
+        treatment: b.treatment,
+        date: b.date,
+        time: b.time
+      };
+    });
+    localStorage.setItem('sahara_public_status', JSON.stringify(publicRegistry));
   }
   
   if (!localStorage.getItem('sahara_messages')) {
@@ -375,8 +400,9 @@ function performTrackerSearch(query) {
   const formattedQuery = query.trim().toUpperCase();
   if (!formattedQuery) return;
   
-  const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
-  const found = bookings.find(b => b.id.toUpperCase() === formattedQuery);
+  // Safe Lookup: read exclusively from public registry containing only non-sensitive schedule metadata
+  const publicRegistry = JSON.parse(localStorage.getItem('sahara_public_status') || '{}');
+  const found = publicRegistry[formattedQuery];
   
   results.style.display = 'block';
   results.style.opacity = '0';
@@ -410,8 +436,8 @@ function performTrackerSearch(query) {
       <div style="background: ${statusBg}; border-left: 4px solid ${statusColor}; border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: left;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
           <div>
-            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--navy-dark); font-weight: 700; margin: 0 0 0.15rem 0;">${found.name}</h4>
-            <p style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500; margin: 0;">Reference Code: <strong style="font-family: monospace; color: var(--navy); font-size: 0.85rem;">${found.id}</strong></p>
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--navy-dark); font-weight: 700; margin: 0 0 0.15rem 0;">Appointment Schedule</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500; margin: 0;">Reference ID: <strong style="font-family: monospace; color: var(--navy); font-size: 0.85rem;">${formattedQuery}</strong></p>
           </div>
           <span style="display: inline-flex; align-items: center; padding: 0.35rem 0.8rem; border-radius: 9999px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #fff; border: 1.5px solid ${statusColor}; color: ${statusColor};">
             ${found.status}
