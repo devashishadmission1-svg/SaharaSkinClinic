@@ -220,20 +220,145 @@
   </div>
 </section>
 
-<!-- Appointment CTA -->
-<section id="appointment">
-  <div class="container" style="position:relative;z-index:1;text-align:center">
-    <span class="section-eyebrow reveal" style="color:var(--rose-gold-light)">Ready?</span>
-    <h2 class="reveal reveal-delay-1" style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;color:#fff;margin:.75rem 0 1rem">Book Your Appointment Today</h2>
-    <p class="reveal reveal-delay-2" style="color:rgba(255,255,255,.75);max-width:500px;margin:0 auto 2.5rem;line-height:1.7">Take the first step towards healthier skin. Our team is ready to help you look and feel your best.</p>
-    <div class="reveal reveal-delay-3" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
-      <a href="tel:+977-1-5247316" class="btn-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.338c0 8.195 6.646 14.841 14.841 14.841a14.79 14.79 0 0 0 7.548-2.056l.21-.124V15.75A1.875 1.875 0 0 0 23.1 14.1l-2.652-1.768a1.875 1.875 0 0 0-2.172.262l-.74.74a.75.75 0 0 1-.84.145 11.365 11.365 0 0 1-5.575-5.575.75.75 0 0 1 .145-.84l.74-.74a1.875 1.875 0 0 0 .261-2.172L10.5.9A1.875 1.875 0 0 0 8.75.148H5.5A1.875 1.875 0 0 0 3.625 2.023c-.07.442-.113.89-.128 1.341"/></svg>
-        Call: +977-1-5247316
-      </a>
-      <a href="#contact" class="btn-secondary">Send a Message</a>
+<!-- Appointment Section -->
+<section id="appointment" style="background: linear-gradient(135deg, var(--navy), var(--navy-light)); overflow: hidden; position: relative;">
+  <div class="appointment-orb" style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(209,30,105,0.25) 0%, transparent 70%); top: -200px; right: -100px; border-radius: 50%; pointer-events: none; z-index: 0;"></div>
+  <div class="appointment-orb-2" style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(58,190,249,0.3) 0%, transparent 70%); bottom: -100px; left: -100px; border-radius: 50%; pointer-events: none; z-index: 0;"></div>
+  
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="appointment-grid" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.5rem; align-items: center;">
+      
+      <!-- Left: Editorial Content -->
+      <div class="appointment-info reveal">
+        <span class="section-eyebrow" style="color: var(--rose-gold-light)">Schedule Consultation</span>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin: 0.5rem 0 1.25rem;">
+          Begin your journey to<br><em>radiant, healthy</em> skin.
+        </h2>
+        <p style="color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 2rem; font-size: 1rem;">
+          Book a premium consultation with Dr. Prabin Dhakal. Receive personalized care, expert diagnosis, and an advanced clinical treatment plan tailored exactly to your skin needs.
+        </p>
+        
+        <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;">
+          <div style="display: flex; align-items: center; gap: 1rem; color: #fff;">
+            <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--rose-gold-light); flex-shrink: 0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+            </div>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem; font-weight: 600; color: #fff;">HOD-Led Diagnostics</h4>
+              <p style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.65);">Consult directly with the Head of Dermatology.</p>
+            </div>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 1rem; color: #fff;">
+            <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--rose-gold-light); flex-shrink: 0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            </div>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem; font-weight: 600; color: #fff;">Flexible Time Slots</h4>
+              <p style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.65);">Choose a date and time slot that fits your busy schedule.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;">
+          <a href="tel:+977-1-5247316" style="display:flex; align-items:center; gap:0.5rem; color:#fff; text-decoration:none; font-weight:600; font-size:0.95rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="var(--rose-gold-light)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.338c0 8.195 6.646 14.841 14.841 14.841a14.79 14.79 0 0 0 7.548-2.056l.21-.124V15.75A1.875 1.875 0 0 0 23.1 14.1l-2.652-1.768a1.875 1.875 0 0 0-2.172.262l-.74.74a.75.75 0 0 1-.84.145 11.365 11.365 0 0 1-5.575-5.575.75.75 0 0 1 .145-.84l.74-.74a1.875 1.875 0 0 0 .261-2.172L10.5.9A1.875 1.875 0 0 0 8.75.148H5.5A1.875 1.875 0 0 0 3.625 2.023c-.07.442-.113.89-.128 1.341"/></svg>
+            +977-1-5247316
+          </a>
+          <span style="color: rgba(255,255,255,0.4)">|</span>
+          <span style="font-size: 0.85rem; color: rgba(255,255,255,0.6)">Sunday – Friday: 10:00 AM – 7:00 PM</span>
+        </div>
+      </div>
+      
+      <!-- Right: Glassmorphic Booking Form -->
+      <div class="reveal reveal-delay-2">
+        <div style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; padding: 2.25rem; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #fff; margin-bottom: 0.25rem; font-weight: 700;">Request an Appointment</h3>
+          <p style="color: rgba(255,255,255,0.65); font-size: 0.85rem; margin-bottom: 1.5rem;">Fill in your details below. We'll confirm your slot shortly.</p>
+          
+          <form id="booking-form" style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div>
+                <label class="form-label" for="booking-name" style="color: rgba(255,255,255,0.85);">Name</label>
+                <input id="booking-name" type="text" class="form-input" placeholder="Full Name" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy);"/>
+              </div>
+              <div>
+                <label class="form-label" for="booking-phone" style="color: rgba(255,255,255,0.85);">Phone Number</label>
+                <input id="booking-phone" type="tel" class="form-input" placeholder="98XXXXXXXX" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy);"/>
+              </div>
+            </div>
+            
+            <div>
+              <label class="form-label" for="booking-email" style="color: rgba(255,255,255,0.85);">Email Address</label>
+              <input id="booking-email" type="email" class="form-input" placeholder="yourname@domain.com" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy);"/>
+            </div>
+            
+            <div>
+              <label class="form-label" for="booking-treatment" style="color: rgba(255,255,255,0.85);">Select Treatment</label>
+              <select id="booking-treatment" class="form-input" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy); cursor: pointer; height: auto;">
+                <option value="" disabled selected>Choose a treatment...</option>
+                <option value="Laser Treatment">Laser Treatment</option>
+                <option value="Hair Transplant">Hair Transplant</option>
+                <option value="Allergy Test">Allergy Test</option>
+                <option value="Botox and Fillers">Botox and Fillers</option>
+                <option value="Cryotherapy">Cryotherapy</option>
+                <option value="Chemical Peeling">Chemical Peeling</option>
+                <option value="Mole Removal">Mole Removal</option>
+                <option value="Teledermatology">Teledermatology</option>
+                <option value="PRP Therapy">PRP Therapy</option>
+                <option value="Cosmetic Surgery">Cosmetic Surgery</option>
+                <option value="Skin Analyzer">Skin Analyzer</option>
+                <option value="ZSR Circumcision">ZSR Circumcision</option>
+                <option value="Photo Therapy">Photo Therapy</option>
+                <option value="Vitiligo Surgery">Vitiligo Surgery</option>
+              </select>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem;">
+              <div>
+                <label class="form-label" for="booking-date" style="color: rgba(255,255,255,0.85);">Preferred Date</label>
+                <input id="booking-date" type="date" class="form-input" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy);"/>
+              </div>
+              <div>
+                <label class="form-label" for="booking-time" style="color: rgba(255,255,255,0.85);">Preferred Time</label>
+                <select id="booking-time" class="form-input" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy); cursor: pointer; height: auto;">
+                  <option value="Morning">Morning</option>
+                  <option value="Afternoon" selected>Afternoon</option>
+                  <option value="Evening">Evening</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label class="form-label" for="booking-notes" style="color: rgba(255,255,255,0.85);">Message/Notes (Optional)</label>
+              <textarea id="booking-notes" rows="2" class="form-input" placeholder="Any specific concerns..." style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy); resize: vertical;"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem; background: linear-gradient(135deg, var(--rose-gold-light), var(--rose-gold)); border: none; box-shadow: 0 6px 20px rgba(240,98,146,0.3);">
+              Request Consultation Slot
+            </button>
+            
+            <div id="booking-success" style="display: none; background: #ECFDF5; border: 1px solid #6EE7B7; border-radius: 10px; padding: 0.85rem; color: #065F46; font-size: 0.85rem; font-weight: 500; align-items: center; gap: 0.5rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span>Booking request saved! Reference: <strong id="booking-ref-id">#SH-123</strong>. We will contact you soon.</span>
+            </div>
+            <div id="booking-error" style="display: none; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 10px; padding: 0.85rem; color: #991B1B; font-size: 0.85rem;">
+              Something went wrong. Please check your details and try again.
+            </div>
+          </form>
+        </div>
+      </div>
+      
     </div>
   </div>
+  <style>
+    @media(max-width: 900px) {
+      .appointment-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+      }
+    }
+  </style>
 </section>
 
 <!-- Contact -->
@@ -335,7 +460,7 @@
       </div>
     </div>
     <div style="border-top:1px solid rgba(255,255,255,.1);padding:1.5rem 0;text-align:center;font-size:.8rem;color:rgba(255,255,255,.4)">
-      &copy; 2024 Sahara Skin Clinic. All rights reserved. · BP Marg, Kalanki-14, Kathmandu
+      <a href="admin.html" style="color:inherit;text-decoration:none;cursor:default;" id="admin-trigger">&copy;</a> 2024 Sahara Skin Clinic. All rights reserved. · BP Marg, Kalanki-14, Kathmandu
     </div>
   </div>
   <style>@media(max-width:768px){footer .container>div:first-child{grid-template-columns:1fr 1fr!important}}</style>

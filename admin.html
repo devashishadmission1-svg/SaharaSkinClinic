@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sahara Skin Clinic — Administrative Portal</title>
+  <link rel="icon" type="image/png" href="8201973.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --rose-gold: #D11E69;
+      --rose-gold-light: #F06292;
+      --rose-gold-dark: #9C0D4D;
+      --cream: #FFFFFF;
+      --cream-dark: #F8FDFF;
+      --navy: #0084B4;
+      --navy-light: #3ABEF9;
+      --navy-dark: #005A7C;
+      --text-body: #2D3436;
+      --text-muted: #636E72;
+      --bg-admin: #F4F9FC;
+      --border-color: rgba(209,30,105,0.12);
+      
+      /* Status Colors */
+      --status-pending-bg: #FFF9E6;
+      --status-pending-text: #B27B00;
+      --status-confirmed-bg: #E6F8F5;
+      --status-confirmed-text: #00897B;
+      --status-completed-bg: #E8F5E9;
+      --status-completed-text: #2E7D32;
+      --status-cancelled-bg: #FFEBEE;
+      --status-cancelled-text: #C62828;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-admin);
+      color: var(--text-body);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* Auth Glassmorphic Container */
+    #auth-container {
+      width: 100%;
+      max-width: 440px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .auth-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 20px 40px rgba(0, 132, 180, 0.08), 0 1px 3px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--rose-gold), var(--navy-light));
+    }
+
+    .auth-logo {
+      height: 64px;
+      width: auto;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 132, 180, 0.1);
+    }
+
+    .auth-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      color: var(--navy-dark);
+      background: #FFFFFF;
+      border: 1.5px solid rgba(0, 132, 180, 0.15);
+      border-radius: 12px;
+      outline: none;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-input:focus {
+      border-color: var(--rose-gold);
+      box-shadow: 0 0 0 4px rgba(209, 30, 165, 0.08);
+    }
+    
+    .password-wrapper {
+      position: relative;
+    }
+    
+    .toggle-password {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .toggle-password:hover {
+      color: var(--rose-gold);
+    }
+
+    .auth-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-dark));
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(209, 30, 105, 0.3);
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+      margin-top: 0.5rem;
+    }
+
+    .auth-btn:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(209, 30, 105, 0.4);
+    }
+
+    .auth-error {
+      color: var(--status-cancelled-text);
+      background: var(--status-cancelled-bg);
+      border: 1px solid rgba(198, 40, 40, 0.2);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* Main Dashboard Layout (Hidden initially) */
+    #dashboard-container {
+      display: none;
+      width: 100%;
+      min-height: 100vh;
+      grid-template-columns: 260px 1fr;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg-admin);
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      background: #FFFFFF;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      z-index: 20;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .sidebar-logo {
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .sidebar-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .sidebar-brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: -2px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .nav-item-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 550;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .nav-item-btn svg {
+      transition: stroke 0.3s;
+    }
+
+    .nav-item-btn:hover {
+      background: var(--cream-dark);
+      color: var(--navy);
+    }
+
+    .nav-item-btn.active {
+      background: linear-gradient(135deg, rgba(0, 132, 180, 0.08), rgba(209, 30, 105, 0.03));
+      color: var(--navy-dark);
+      font-weight: 600;
+      border-left: 4px solid var(--rose-gold);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding-left: 1rem;
+    }
+
+    .nav-item-btn.active svg {
+      color: var(--rose-gold);
+    }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .user-info p:first-child {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--navy-dark);
+    }
+
+    .user-info p:last-child {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .logout-btn {
+      width: 100%;
+      background: transparent;
+      border: 1.5px solid rgba(198, 40, 40, 0.2);
+      color: #C62828;
+      font-weight: 600;
+      padding: 0.75rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .logout-btn:hover {
+      background: rgba(198, 40, 40, 0.05);
+      border-color: #C62828;
+    }
+
+    /* Main Panel Content */
+    .main-panel {
+      padding: 2.5rem 3rem;
+      overflow-y: auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+
+    .panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+    }
+
+    .panel-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .quick-actions-bar {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-color);
+      color: var(--navy-dark);
+      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-secondary:hover {
+      background: var(--cream-dark);
+      border-color: rgba(209,30,105,0.3);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-dark));
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 12px rgba(209, 30, 105, 0.2);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px rgba(209, 30, 105, 0.3);
+    }
+
+    /* KPI Summary Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .kpi-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 132, 180, 0.02);
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0; width: 4px;
+    }
+
+    .kpi-card.total::after { background: var(--navy); }
+    .kpi-card.pending::after { background: var(--rose-gold-light); }
+    .kpi-card.confirmed::after { background: var(--navy-light); }
+    .kpi-card.completed::after { background: #4CAF50; }
+
+    .kpi-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-top: 0.4rem;
+    }
+
+    .kpi-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .kpi-card.total .kpi-icon-wrap { background: rgba(0, 132, 180, 0.07); color: var(--navy); }
+    .kpi-card.pending .kpi-icon-wrap { background: rgba(240, 98, 146, 0.08); color: var(--rose-gold); }
+    .kpi-card.confirmed .kpi-icon-wrap { background: rgba(58, 190, 249, 0.08); color: var(--navy-light); }
+    .kpi-card.completed .kpi-icon-wrap { background: rgba(76, 175, 80, 0.08); color: #4CAF50; }
+
+    /* Dashboard Main Grid Split */
+    .dashboard-split-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Database Table / Section styling */
+    .table-section {
+      background: #FFFFFF;
+      border-radius: 18px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 132, 180, 0.02);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .table-header-controls {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      background: var(--cream-dark);
+    }
+
+    .filter-controls {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      width: 260px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.55rem 1rem 0.55rem 2.25rem;
+      border-radius: 10px;
+      border: 1.5px solid rgba(0, 132, 180, 0.12);
+      background: #FFFFFF;
+      font-size: 0.85rem;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .search-input:focus {
+      border-color: var(--rose-gold);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 52%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .select-dropdown {
+      padding: 0.55rem 1.5rem 0.55rem 0.75rem;
+      border-radius: 10px;
+      border: 1.5px solid rgba(0, 132, 180, 0.12);
+      font-size: 0.82rem;
+      color: var(--navy-dark);
+      background: #FFFFFF;
+      outline: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .select-dropdown:focus {
+      border-color: var(--rose-gold);
+    }
+
+    .db-table-wrapper {
+      overflow-x: auto;
+      max-height: 480px;
+    }
+
+    .db-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .db-table th {
+      background: #FFFFFF;
+      color: var(--navy);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      padding: 1rem 1.5rem;
+      border-bottom: 1.5px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .db-table td {
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid rgba(0, 132, 180, 0.06);
+      vertical-align: middle;
+      color: var(--text-body);
+    }
+
+    .db-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .db-table tr:hover {
+      background: var(--cream-dark);
+    }
+
+    .patient-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .patient-name {
+      font-weight: 600;
+      color: var(--navy-dark);
+      font-size: 0.92rem;
+    }
+
+    .patient-contact {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .status-badge.pending { background: var(--status-pending-bg); color: var(--status-pending-text); }
+    .status-badge.confirmed { background: var(--status-confirmed-bg); color: var(--status-confirmed-text); }
+    .status-badge.completed { background: var(--status-completed-bg); color: var(--status-completed-text); }
+    .status-badge.cancelled { background: var(--status-cancelled-bg); color: var(--status-cancelled-text); }
+
+    .action-icons-wrap {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 132, 180, 0.1);
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .action-icon-btn.confirm:hover { background: var(--status-confirmed-bg); border-color: rgba(0, 137, 123, 0.3); color: var(--status-confirmed-text); }
+    .action-icon-btn.complete:hover { background: var(--status-completed-bg); border-color: rgba(46, 125, 50, 0.3); color: var(--status-completed-text); }
+    .action-icon-btn.cancel:hover { background: var(--status-cancelled-bg); border-color: rgba(198, 40, 40, 0.3); color: var(--status-cancelled-text); }
+    .action-icon-btn.delete:hover { background: #FFF3E0; border-color: rgba(230, 81, 0, 0.3); color: #E65100; }
+
+    .empty-state {
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .empty-state-icon {
+      color: var(--rose-gold-light);
+      opacity: 0.6;
+    }
+
+    /* Analytical Charts View */
+    .chart-section {
+      background: #FFFFFF;
+      border-radius: 18px;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 132, 180, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chart-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+    }
+
+    /* Modal / Dialog styling */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 43, 60, 0.4);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .modal-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 24px 64px rgba(0, 43, 60, 0.15);
+      overflow: hidden;
+      animation: modal-slide-in 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes modal-slide-in {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      background: var(--cream-dark);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--navy-dark);
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--rose-gold);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      background: var(--cream-dark);
+    }
+    
+    /* Notification Toast */
+    #toast-notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--navy-dark);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 500;
+    }
+    
+    #toast-notification.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Repo Sync Center Styling */
+    .sync-card {
+      background: linear-gradient(135deg, #0d2b45, #203c56);
+      color: white;
+      border-radius: 18px;
+      padding: 1.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(13, 43, 69, 0.15);
+    }
+    
+    .sync-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--navy-light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .sync-meta {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+    
+    .sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      color: #90CAF9;
+      font-family: monospace;
+      margin-bottom: 0.75rem;
+    }
+
+    .sync-status-indicator {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4CAF50;
+      box-shadow: 0 0 8px #4CAF50;
+    }
+
+    .console-terminal {
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.85rem;
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: #81C784;
+      max-height: 110px;
+      overflow-y: auto;
+      margin-top: 1rem;
+      line-height: 1.4;
+    }
+    
+    .console-line {
+      margin-bottom: 0.2rem;
+    }
+
+    .git-user-text {
+      color: var(--rose-gold-light);
+    }
+    
+    /* Interactive bar visualizer */
+    .bar-chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    
+    .bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    .bar-label-group {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .bar-track {
+      height: 7px;
+      background: #ECEFF1;
+      border-radius: 9999px;
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--navy-light), var(--rose-gold));
+      border-radius: 9999px;
+      transition: width 1s ease-out;
+    }
+
+    @media (max-width: 1120px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-split-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      #dashboard-container { grid-template-columns: 1fr; }
+      .sidebar { display: none; } /* On mobile, we can toggle or default to main panel */
+      .kpi-grid { grid-template-columns: 1fr; }
+      .panel-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background decorative elements -->
+  <div style="position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; width: 600px; height: 600px; background: rgba(209,30,105,0.05); top: -20%; right: -10%; z-index: 1;"></div>
+  <div style="position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; width: 500px; height: 500px; background: rgba(58,190,249,0.06); bottom: -15%; left: -5%; z-index: 1;"></div>
+
+  <!-- AUTHENTICATION FORM VIEW -->
+  <div id="auth-container">
+    <div class="auth-card">
+      <img src="Sahara1.jpg" alt="Sahara Skin Clinic Logo" class="auth-logo"/>
+      <h2 class="auth-title">Administrative Portal</h2>
+      <p class="auth-subtitle">AUTHENTICATE ACCESS</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="admin-pass">Access Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="admin-pass" class="form-input" placeholder="••••••••••••••" required autocomplete="current-password"/>
+            <button type="button" class="toggle-password" id="toggle-pass-btn">SHOW</button>
+          </div>
+        </div>
+        
+        <button type="submit" class="auth-btn">Authorize Session</button>
+      </form>
+      
+      <div id="login-error-msg" class="auth-error">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/></svg>
+        <span>Authentication failed. Try again.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMINISTRATIVE DASHBOARD VIEW -->
+  <div id="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="Sahara1.jpg" alt="Sahara Logo" class="sidebar-logo"/>
+        <div>
+          <h1 class="sidebar-brand-name">Sahara Skin</h1>
+          <p class="sidebar-brand-sub">Admin Portal</p>
+        </div>
+      </div>
+      
+      <nav class="nav-list">
+        <li>
+          <button class="nav-item-btn active" onclick="switchTab('bookings')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 0.2rem"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            Consultation Bookings
+          </button>
+        </li>
+        <li>
+          <button class="nav-item-btn" onclick="switchTab('messages')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 0.2rem"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"/></svg>
+            Contact Inquiries
+          </button>
+        </li>
+        <li>
+          <button class="nav-item-btn" onclick="switchTab('stats')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 0.2rem"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Analytics & Simulator
+          </button>
+        </li>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-badge">
+          <div class="user-avatar">PD</div>
+          <div class="user-info">
+            <p>Dr. Prabin Dhakal</p>
+            <p>Chief Dermatologist</p>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="logoutSession()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          Logout Session
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Panel Pages -->
+    
+    <!-- PAGE 1: CONSULTATION BOOKINGS -->
+    <main class="main-panel" id="panel-bookings">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Consultation Bookings</h2>
+          <p class="panel-subtitle">Manage online appointment schedules and check patient requests</p>
+        </div>
+        <div class="quick-actions-bar">
+          <button class="btn-secondary" onclick="exportBookingsToCSV()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            Export CSV
+          </button>
+          <button class="btn-primary" onclick="openAddBookingModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            Add walk-in Booking
+          </button>
+        </div>
+      </div>
+
+      <!-- Bookings KPIs -->
+      <section class="kpi-grid">
+        <div class="kpi-card total">
+          <div>
+            <p class="kpi-label">Total Bookings</p>
+            <p class="kpi-value" id="kpi-total-bookings">0</p>
+          </div>
+          <div class="kpi-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.109A11.386 11.386 0 0 1 12 19.5c-3.116 0-6.043-.613-8.71-1.714v-.11a9.003 9.003 0 0 1 15.532-5.786m.024 7.238c-.02.2-.03.402-.03.607 0 1.258.4 2.422 1.082 3.376m0 0a3 3 0 1 0 5.437-1.376 9.339 9.339 0 0 0-6.519-2M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6.75 2.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0ZM3 16.5v.003c0 1.113.285 2.16.786 3.07M3 16.5v.109A11.386 11.386 0 0 0 6 19.5c.318 0 .633-.013.947-.037M3 16.5a9 9 0 0 1 12.024-8.497M9 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+          </div>
+        </div>
+        <div class="kpi-card pending">
+          <div>
+            <p class="kpi-label">Pending Reviews</p>
+            <p class="kpi-value" id="kpi-pending-bookings">0</p>
+          </div>
+          <div class="kpi-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          </div>
+        </div>
+        <div class="kpi-card confirmed">
+          <div>
+            <p class="kpi-label">Confirmed Slips</p>
+            <p class="kpi-value" id="kpi-confirmed-bookings">0</p>
+          </div>
+          <div class="kpi-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          </div>
+        </div>
+        <div class="kpi-card completed">
+          <div>
+            <p class="kpi-label">Completed Visits</p>
+            <p class="kpi-value" id="kpi-completed-bookings">0</p>
+          </div>
+          <div class="kpi-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499c-.105-.21-.302-.35-.522-.379a.59a.59 0 0 0-.584.283l-8 14a.59.59 0 0 0 .522.897h16a.59.59 0 0 0 .522-.897l-8-14Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 17h.01M12 10v4"/></svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Split Layout: Table and Sync Control -->
+      <div class="dashboard-split-grid">
+        <!-- DB Table Section -->
+        <div class="table-section">
+          <div class="table-header-controls">
+            <!-- Left Filter controls -->
+            <div class="filter-controls">
+              <div class="search-input-wrap">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="booking-search" class="search-input" placeholder="Search by patient name or phone..." oninput="renderAdminBookings()"/>
+              </div>
+              
+              <select id="filter-treatment" class="select-dropdown" onchange="renderAdminBookings()">
+                <option value="ALL">All Treatments</option>
+                <option value="Laser Treatment">Laser Treatment</option>
+                <option value="Hair Transplant">Hair Transplant</option>
+                <option value="Allergy Test">Allergy Test</option>
+                <option value="Botox and Fillers">Botox and Fillers</option>
+                <option value="Cryotherapy">Cryotherapy</option>
+                <option value="Chemical Peeling">Chemical Peeling</option>
+                <option value="Mole Removal">Mole Removal</option>
+                <option value="Teledermatology">Teledermatology</option>
+                <option value="PRP Therapy">PRP Therapy</option>
+                <option value="Cosmetic Surgery">Cosmetic Surgery</option>
+                <option value="Skin Analyzer">Skin Analyzer</option>
+                <option value="ZSR Circumcision">ZSR Circumcision</option>
+                <option value="Photo Therapy">Photo Therapy</option>
+                <option value="Vitiligo Surgery">Vitiligo Surgery</option>
+              </select>
+
+              <select id="filter-status" class="select-dropdown" onchange="renderAdminBookings()">
+                <option value="ALL">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="db-table-wrapper">
+            <table class="db-table" id="bookings-table-el">
+              <thead>
+                <tr>
+                  <th>REF ID</th>
+                  <th>Patient Info</th>
+                  <th>Treatment Focus</th>
+                  <th>Date & slot</th>
+                  <th>Status</th>
+                  <th>Action Logs</th>
+                </tr>
+              </thead>
+              <tbody id="bookings-tbody">
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div id="bookings-empty" class="empty-state" style="display: none;">
+            <svg class="empty-state-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+            <div>
+              <h3>No Bookings Found</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Adjust your filter options or add a manual mock data set.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sync controls -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div class="sync-card">
+            <div class="sync-badge">
+              <span class="sync-status-indicator"></span>
+              <span>main branch</span>
+            </div>
+            <h4>GitHub Repository Sync</h4>
+            <p class="sync-meta">Push local clinic database changes, bookings, and treatment modifications to the remote repository.</p>
+            
+            <button class="btn-primary" style="width: 100%; justify-content: center; background: #3ABEF9; font-weight:700; color:#0d2b45; box-shadow: 0 4px 15px rgba(58, 190, 249, 0.2);" onclick="simulatePushToRepo()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 17.25 4.5H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+              Push Database to GitHub
+            </button>
+            
+            <div class="console-terminal" id="terminal-console-sync">
+              <div class="console-line">> Ready to synchronize clinic state.</div>
+              <div class="console-line">> Git Remote: <span class="git-user-text">devashishadmission1-svg/SaharaSkinClinic</span></div>
+            </div>
+          </div>
+
+          <!-- Treatment Distribution Overview (Analytical chart) -->
+          <div class="chart-section">
+            <h3 class="chart-title">Treatment Popularity</h3>
+            <div class="bar-chart-container" id="popularity-chart-el">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- PAGE 2: CONTACT INQUIRIES -->
+    <main class="main-panel" id="panel-messages" style="display: none;">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Contact Inquiries</h2>
+          <p class="panel-subtitle">Manage queries and requests submitted via the website contact form</p>
+        </div>
+        <button class="btn-secondary" onclick="exportMessagesToCSV()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+          Export messages
+        </button>
+      </div>
+
+      <div class="table-section">
+        <div class="table-header-controls">
+          <div class="filter-controls">
+            <div class="search-input-wrap" style="width: 320px;">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="messages-search" class="search-input" placeholder="Search by name, email, or message body..." oninput="renderAdminMessages()"/>
+            </div>
+            
+            <select id="filter-message-status" class="select-dropdown" onchange="renderAdminMessages()">
+              <option value="ALL">All Statuses</option>
+              <option value="Unread">Unread</option>
+              <option value="Replied">Replied</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="db-table-wrapper">
+          <table class="db-table">
+            <thead>
+              <tr>
+                <th>INQUIRY ID</th>
+                <th>Sender Details</th>
+                <th>Message Content</th>
+                <th>Sent Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="messages-tbody">
+              <!-- Populated dynamically via JS -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div id="messages-empty" class="empty-state" style="display: none;">
+          <svg class="empty-state-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+          <div>
+            <h3>No Messages Found</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Everything caught up! No contact messages in queue.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- PAGE 3: SIMULATOR & SETTINGS -->
+    <main class="main-panel" id="panel-stats" style="display: none;">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">System Settings & Simulator</h2>
+          <p class="panel-subtitle">Control the local environment state, simulate active entries and run database checks</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        
+        <!-- Database tools -->
+        <div class="table-section" style="padding: 2rem; gap: 1.5rem;">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--navy-dark); font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">Local Database Tools</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <p style="font-size: 0.88rem; color: var(--text-body); line-height: 1.6;">Use the controls below to populate dummy datasets for testing user interfaces, or wipe out active databases to start fresh.</p>
+            
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn-primary" style="background: linear-gradient(135deg, var(--navy-light), var(--navy)); border:none; box-shadow: 0 4px 15px rgba(0, 132, 180, 0.2);" onclick="resetToMockData()">
+                Wipe & Populate Mock Data
+              </button>
+              <button class="btn-secondary" style="color: #C62828; border-color: rgba(198, 40, 40, 0.2);" onclick="clearAllData()">
+                Delete All Active Records
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Appointment Simulation -->
+        <div class="table-section" style="padding: 2rem; gap: 1.5rem;">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--navy-dark); font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">Simulate New Booking</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <p style="font-size: 0.88rem; color: var(--text-body); line-height: 1.6;">Instantly inject a randomly generated patient booking requests into the active appointment database.</p>
+            
+            <button class="btn-primary" style="align-self: flex-start;" onclick="simulateRandomBooking()">
+              Simulate 1 New Patient Request
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD WALK-IN APPOINTMENT MODAL -->
+  <div class="modal-backdrop" id="add-booking-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Log Consultation</h3>
+        <button class="modal-close-btn" onclick="closeAddBookingModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="modal-booking-form" style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="m-name">Patient Name</label>
+              <input type="text" id="m-name" class="form-input" placeholder="e.g. Ramesh Giri" required/>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="m-phone">Phone</label>
+              <input type="tel" id="m-phone" class="form-input" placeholder="e.g. 9841XXXXXX" required/>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="m-email">Email Address</label>
+            <input type="email" id="m-email" class="form-input" placeholder="e.g. ramesh@giri.com" required/>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="m-treatment">Select Treatment</label>
+            <select id="m-treatment" class="form-input" required>
+              <option value="" disabled selected>Select service focus...</option>
+              <option value="Laser Treatment">Laser Treatment</option>
+              <option value="Hair Transplant">Hair Transplant</option>
+              <option value="Allergy Test">Allergy Test</option>
+              <option value="Botox and Fillers">Botox and Fillers</option>
+              <option value="Cryotherapy">Cryotherapy</option>
+              <option value="Chemical Peeling">Chemical Peeling</option>
+              <option value="Mole Removal">Mole Removal</option>
+              <option value="Teledermatology">Teledermatology</option>
+              <option value="PRP Therapy">PRP Therapy</option>
+              <option value="Cosmetic Surgery">Cosmetic Surgery</option>
+              <option value="Skin Analyzer">Skin Analyzer</option>
+              <option value="ZSR Circumcision">ZSR Circumcision</option>
+              <option value="Photo Therapy">Photo Therapy</option>
+              <option value="Vitiligo Surgery">Vitiligo Surgery</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="m-date">Preferred Date</label>
+              <input type="date" id="m-date" class="form-input" required/>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="m-time">Preferred Slot</label>
+              <select id="m-time" class="form-input" required>
+                <option value="Morning">Morning</option>
+                <option value="Afternoon" selected>Afternoon</option>
+                <option value="Evening">Evening</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="m-notes">Internal Doctor Notes (Optional)</label>
+            <textarea id="m-notes" rows="2" class="form-input" placeholder="Warts on cheek, review allergy details..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeAddBookingModal()">Cancel</button>
+        <button class="btn-primary" onclick="submitAddBookingForm()">Log Consultation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-notification">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+    <span id="toast-text">System database synchronized successfully.</span>
+  </div>
+
+  <!-- CORE ADMINISTRATIVE SCRIPT -->
+  <script>
+    // Access credentials
+    const SECURE_PASS = "tanahun@111";
+
+    // Authentication Checks
+    window.addEventListener('DOMContentLoaded', () => {
+      // Check if session token exists
+      if (sessionStorage.getItem('sahara_admin_auth') === 'true') {
+        showDashboard();
+      } else {
+        document.getElementById('auth-container').style.display = 'block';
+        document.getElementById('dashboard-container').style.display = 'none';
+      }
+    });
+
+    // Toggle Password Visibility
+    const togglePassBtn = document.getElementById('toggle-pass-btn');
+    const adminPassInput = document.getElementById('admin-pass');
+    if (togglePassBtn && adminPassInput) {
+      togglePassBtn.addEventListener('click', () => {
+        if (adminPassInput.type === 'password') {
+          adminPassInput.type = 'text';
+          togglePassBtn.textContent = 'HIDE';
+        } else {
+          adminPassInput.type = 'password';
+          togglePassBtn.textContent = 'SHOW';
+        }
+      });
+    }
+
+    // Handle Login Submit
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const enteredPass = adminPassInput.value;
+        const errorMsg = document.getElementById('login-error-msg');
+        
+        if (enteredPass === SECURE_PASS) {
+          sessionStorage.setItem('sahara_admin_auth', 'true');
+          errorMsg.style.display = 'none';
+          showDashboard();
+          showToast("Authorized session successfully!");
+        } else {
+          errorMsg.style.display = 'flex';
+          adminPassInput.value = '';
+          adminPassInput.focus();
+        }
+      });
+    }
+
+    // Logout function
+    function logoutSession() {
+      sessionStorage.removeItem('sahara_admin_auth');
+      window.location.reload();
+    }
+
+    function showDashboard() {
+      document.getElementById('auth-container').style.display = 'none';
+      document.getElementById('dashboard-container').style.display = 'grid';
+      document.body.style.alignItems = 'stretch';
+      
+      // Load initial databases
+      refreshKPIs();
+      renderAdminBookings();
+      renderAdminMessages();
+      renderPopularityChart();
+      
+      // Set min date on add booking modal to today
+      const mDateEl = document.getElementById('m-date');
+      if (mDateEl) {
+        mDateEl.min = new Date().toISOString().split('T')[0];
+        mDateEl.value = new Date().toISOString().split('T')[0];
+      }
+    }
+
+    // Navigation switching tabs
+    function switchTab(tabId) {
+      // Toggle nav button classes
+      const navButtons = document.querySelectorAll('.nav-item-btn');
+      navButtons.forEach(btn => btn.classList.remove('active'));
+      
+      // Select corresponding navigation item to make active
+      let targetIndex = 0;
+      if (tabId === 'messages') targetIndex = 1;
+      else if (tabId === 'stats') targetIndex = 2;
+      navButtons[targetIndex].classList.add('active');
+
+      // Toggle panels
+      document.getElementById('panel-bookings').style.display = (tabId === 'bookings') ? 'flex' : 'none';
+      document.getElementById('panel-messages').style.display = (tabId === 'messages') ? 'flex' : 'none';
+      document.getElementById('panel-stats').style.display = (tabId === 'stats') ? 'flex' : 'none';
+
+      // Refresh data accordingly
+      if (tabId === 'bookings') {
+        renderAdminBookings();
+      } else if (tabId === 'messages') {
+        renderAdminMessages();
+      }
+    }
+
+    /* TOAST HELPER */
+    function showToast(message, type = "success") {
+      const toast = document.getElementById('toast-notification');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = message;
+      
+      // Change styling if error/success
+      if (type === "error") {
+        toast.style.background = '#C62828';
+      } else {
+        toast.style.background = 'var(--navy-dark)';
+      }
+      
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    /* KPI METRICS CALCULATION */
+    function refreshKPIs() {
+      const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      
+      const total = bookings.length;
+      const pending = bookings.filter(b => b.status === 'Pending').length;
+      const confirmed = bookings.filter(b => b.status === 'Confirmed').length;
+      const completed = bookings.filter(b => b.status === 'Completed').length;
+      
+      document.getElementById('kpi-total-bookings').textContent = total;
+      document.getElementById('kpi-pending-bookings').textContent = pending;
+      document.getElementById('kpi-confirmed-bookings').textContent = confirmed;
+      document.getElementById('kpi-completed-bookings').textContent = completed;
+    }
+
+    /* BOOKINGS DATABASE RENDERING */
+    function renderAdminBookings() {
+      const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      const tbody = document.getElementById('bookings-tbody');
+      const emptyState = document.getElementById('bookings-empty');
+      
+      // Filter values
+      const searchQuery = document.getElementById('booking-search').value.toLowerCase().trim();
+      const selectedTreatment = document.getElementById('filter-treatment').value;
+      const selectedStatus = document.getElementById('filter-status').value;
+      
+      // Apply filters
+      const filtered = bookings.filter(item => {
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery) || item.phone.includes(searchQuery);
+        const matchesTreatment = selectedTreatment === 'ALL' || item.treatment === selectedTreatment;
+        const matchesStatus = selectedStatus === 'ALL' || item.status === selectedStatus;
+        return matchesSearch && matchesTreatment && matchesStatus;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'flex';
+        return;
+      }
+      
+      emptyState.style.display = 'none';
+      tbody.innerHTML = filtered.map(b => `
+        <tr>
+          <td style="font-family: monospace; font-weight: 600; color: var(--navy); font-size: 0.82rem;">${b.id}</td>
+          <td>
+            <div class="patient-cell">
+              <span class="patient-name">${b.name}</span>
+              <span class="patient-contact">${b.phone} · ${b.email}</span>
+              ${b.notes && b.notes !== 'No extra notes.' ? `<span style="font-size:0.75rem; color:#E65100; margin-top:0.25rem; font-style:italic;">Note: "${b.notes}"</span>` : ''}
+            </div>
+          </td>
+          <td style="font-weight: 550; color: var(--navy-dark);">${b.treatment}</td>
+          <td>
+            <div style="display:flex; flex-direction:column; gap:0.1rem">
+              <span style="font-weight:550; font-size:0.85rem">${b.date}</span>
+              <span style="font-size:0.75rem; color:var(--text-muted)">Slot: ${b.time}</span>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge ${b.status.toLowerCase()}">${b.status}</span>
+          </td>
+          <td>
+            <div class="action-icons-wrap">
+              ${b.status === 'Pending' ? `
+                <button class="action-icon-btn confirm" title="Confirm Appointment" onclick="updateBookingStatus('${b.id}', 'Confirmed')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+                </button>
+              ` : ''}
+              ${b.status === 'Confirmed' ? `
+                <button class="action-icon-btn complete" title="Complete Session" onclick="updateBookingStatus('${b.id}', 'Completed')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 6 6 9-13.5"/></svg>
+                </button>
+              ` : ''}
+              ${b.status !== 'Cancelled' && b.status !== 'Completed' ? `
+                <button class="action-icon-btn cancel" title="Cancel Appointment" onclick="updateBookingStatus('${b.id}', 'Cancelled')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+                </button>
+              ` : ''}
+              <button class="action-icon-btn delete" title="Delete Permanent" onclick="deleteBookingRecord('${b.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.34 9.149m-8.2 0L5.82 9m3 16.5h6.14a3 3 0 0 0 3-3V7.5H4.14v13.5a3 3 0 0 0 3 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 7.5v-3a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5v3M4.125 7.5h15.75"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Update Status
+    function updateBookingStatus(id, newStatus) {
+      const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      const index = bookings.findIndex(b => b.id === id);
+      if (index !== -1) {
+        bookings[index].status = newStatus;
+        localStorage.setItem('sahara_bookings', JSON.stringify(bookings));
+        
+        refreshKPIs();
+        renderAdminBookings();
+        renderPopularityChart();
+        showToast(`Appointment ${id} status updated to ${newStatus}.`);
+      }
+    }
+
+    // Delete Booking
+    function deleteBookingRecord(id) {
+      if (confirm(`Are you sure you want to permanently delete appointment record ${id}?`)) {
+        let bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+        bookings = bookings.filter(b => b.id !== id);
+        localStorage.setItem('sahara_bookings', JSON.stringify(bookings));
+        
+        refreshKPIs();
+        renderAdminBookings();
+        renderPopularityChart();
+        showToast(`Record ${id} permanently deleted.`, "error");
+      }
+    }
+
+    /* INQUIRIES DATABASE RENDERING */
+    function renderAdminMessages() {
+      const messages = JSON.parse(localStorage.getItem('sahara_messages') || '[]');
+      const tbody = document.getElementById('messages-tbody');
+      const emptyState = document.getElementById('messages-empty');
+      
+      const searchQuery = document.getElementById('messages-search').value.toLowerCase().trim();
+      const selectedStatus = document.getElementById('filter-message-status').value;
+      
+      const filtered = messages.filter(item => {
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery) || 
+                              item.email.toLowerCase().includes(searchQuery) ||
+                              item.message.toLowerCase().includes(searchQuery);
+        const matchesStatus = selectedStatus === 'ALL' || item.status === selectedStatus;
+        return matchesSearch && matchesStatus;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'flex';
+        return;
+      }
+      
+      emptyState.style.display = 'none';
+      tbody.innerHTML = filtered.map(m => `
+        <tr style="${m.status === 'Unread' ? 'background: rgba(209,30,105,0.02); font-weight: 500;' : ''}">
+          <td style="font-family: monospace; font-weight: 600; color: var(--navy); font-size: 0.82rem;">${m.id}</td>
+          <td>
+            <div class="patient-cell">
+              <span class="patient-name">${m.name}</span>
+              <span class="patient-contact">${m.phone} · ${m.email}</span>
+            </div>
+          </td>
+          <td>
+            <div style="max-width: 320px; word-wrap: break-word; font-size:0.84rem; line-height:1.5;">"${m.message}"</div>
+          </td>
+          <td><span style="font-size:0.8rem; color:var(--text-muted);">${m.date}</span></td>
+          <td>
+            <span class="status-badge ${m.status === 'Unread' ? 'pending' : 'confirmed'}">${m.status}</span>
+          </td>
+          <td>
+            <div class="action-icons-wrap">
+              ${m.status === 'Unread' ? `
+                <button class="action-icon-btn confirm" title="Mark as Replied" onclick="toggleMessageStatus('${m.id}')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                </button>
+              ` : `
+                <button class="action-icon-btn cancel" title="Mark as Unread" onclick="toggleMessageStatus('${m.id}')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                </button>
+              `}
+              <button class="action-icon-btn delete" title="Delete Message" onclick="deleteMessage('${m.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.34 9.149m-8.2 0L5.82 9m3 16.5h6.14a3 3 0 0 0 3-3V7.5H4.14v13.5a3 3 0 0 0 3 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 7.5v-3a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5v3M4.125 7.5h15.75"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleMessageStatus(id) {
+      const messages = JSON.parse(localStorage.getItem('sahara_messages') || '[]');
+      const index = messages.findIndex(m => m.id === id);
+      if (index !== -1) {
+        messages[index].status = messages[index].status === 'Unread' ? 'Replied' : 'Unread';
+        localStorage.setItem('sahara_messages', JSON.stringify(messages));
+        renderAdminMessages();
+        showToast("Inquiry status toggled.");
+      }
+    }
+
+    function deleteMessage(id) {
+      if (confirm(`Delete contact message log ${id}?`)) {
+        let messages = JSON.parse(localStorage.getItem('sahara_messages') || '[]');
+        messages = messages.filter(m => m.id !== id);
+        localStorage.setItem('sahara_messages', JSON.stringify(messages));
+        renderAdminMessages();
+        showToast("Message logs deleted.", "error");
+      }
+    }
+
+    /* BAR CHART GENERATION */
+    function renderPopularityChart() {
+      const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      const chartEl = document.getElementById('popularity-chart-el');
+      
+      if (bookings.length === 0) {
+        chartEl.innerHTML = '<div style="font-size:0.8rem;color:var(--text-muted);text-align:center;padding:1rem;">Add consultation data to chart statistics.</div>';
+        return;
+      }
+      
+      // Calculate distributions
+      const dist = {};
+      bookings.forEach(b => {
+        dist[b.treatment] = (dist[b.treatment] || 0) + 1;
+      });
+      
+      // Sort treatments
+      const sorted = Object.entries(dist).sort((a,b) => b[1] - a[1]).slice(0, 4);
+      const maxVal = Math.max(...sorted.map(s => s[1]));
+      
+      chartEl.innerHTML = sorted.map(([treatment, count]) => {
+        const pct = maxVal > 0 ? (count / maxVal) * 100 : 0;
+        return `
+          <div class="bar-row">
+            <div class="bar-label-group">
+              <span>${treatment}</span>
+              <span style="font-weight:700; color:var(--rose-gold);">${count} visits</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* APPOINTMENT BOOKING MODAL ACTIONS */
+    function openAddBookingModal() {
+      document.getElementById('add-booking-modal').style.display = 'flex';
+    }
+
+    function closeAddBookingModal() {
+      document.getElementById('add-booking-modal').style.display = 'none';
+      document.getElementById('modal-booking-form').reset();
+    }
+
+    function submitAddBookingForm() {
+      const name = document.getElementById('m-name').value;
+      const phone = document.getElementById('m-phone').value;
+      const email = document.getElementById('m-email').value;
+      const treatment = document.getElementById('m-treatment').value;
+      const date = document.getElementById('m-date').value;
+      const time = document.getElementById('m-time').value;
+      const notes = document.getElementById('m-notes').value || 'Log walk-in patient request.';
+
+      if (!name || !phone || !email || !treatment || !date) {
+        alert("Please compile all mandatory fields.");
+        return;
+      }
+
+      const refId = 'SH-' + Math.floor(1000 + Math.random() * 9000);
+      const list = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      
+      const newBooking = {
+        id: refId,
+        name,
+        phone,
+        email,
+        treatment,
+        date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+        time,
+        notes,
+        createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        status: 'Confirmed' // Walk-in is auto confirmed
+      };
+
+      list.unshift(newBooking);
+      localStorage.setItem('sahara_bookings', JSON.stringify(list));
+
+      refreshKPIs();
+      renderAdminBookings();
+      renderPopularityChart();
+      closeAddBookingModal();
+      showToast(`Walk-in consultation ${refId} logged!`);
+    }
+
+    /* REPOSITORY PUSH SIMULATION */
+    function simulatePushToRepo() {
+      const consoleEl = document.getElementById('terminal-console-sync');
+      
+      // Inject lines sequentially to simulate real Git push actions
+      const lines = [
+        `> git add index.html script.js style.css admin.html`,
+        `> git commit -m "feat(admin): integrated booking portal and localStorage DB synchronization v2.0.5"`,
+        `> git push origin main`,
+        `[main 9d2ef1c] feat(admin): integrated booking portal`,
+        ` 3 files changed, 252 insertions(+), 18 deletions(-)`,
+        `Compressing objects: 100% (14/14), done.`,
+        `Writing objects: 100% (18/18), 3.42 KiB | 875.00 KiB/s, done.`,
+        `To https://github.com/devashishadmission1-svg/SaharaSkinClinic`,
+        `   b509dfc..9d2ef1c  main -> main`,
+        `> SUCCESS: Clinic database and portal assets deployed to GitHub Pages! 🎉`
+      ];
+
+      consoleEl.innerHTML = '<div class="console-line">> Initializing git handshake...</div>';
+      
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          const lineEl = document.createElement('div');
+          lineEl.className = 'console-line';
+          if (line.startsWith('[') || line.includes('Writing') || line.includes('Compressing')) {
+            lineEl.style.color = 'var(--text-muted)';
+          } else if (line.includes('SUCCESS')) {
+            lineEl.style.color = '#81C784';
+            lineEl.style.fontWeight = '700';
+            showToast("Repository updated and pushed! Deployed via deploy.yml.");
+          } else if (line.startsWith('> git')) {
+            lineEl.innerHTML = `<span style="color:var(--rose-gold-light)">${line.substring(0,5)}</span>${line.substring(5)}`;
+          } else {
+            lineEl.style.color = '#FFF';
+          }
+          lineEl.textContent = line;
+          consoleEl.appendChild(lineEl);
+          consoleEl.scrollTop = consoleEl.scrollHeight;
+        }, (index + 1) * 600);
+      });
+    }
+
+    /* EXPORT UTILITIES */
+    function exportBookingsToCSV() {
+      const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      if (bookings.length === 0) {
+        showToast("No bookings to export.", "error");
+        return;
+      }
+      
+      let csv = 'Reference ID,Patient Name,Phone,Email,Treatment Focus,Preferred Date,Slot,Status,Submitted At,Notes\n';
+      bookings.forEach(b => {
+        csv += `"${b.id}","${b.name.replace(/"/g, '""')}","${b.phone}","${b.email}","${b.treatment}","${b.date}","${b.time}","${b.status}","${b.createdAt}","${b.notes.replace(/"/g, '""')}"\n`;
+      });
+      
+      downloadCSVFile(csv, 'Sahara_Consultation_Bookings.csv');
+    }
+
+    function exportMessagesToCSV() {
+      const messages = JSON.parse(localStorage.getItem('sahara_messages') || '[]');
+      if (messages.length === 0) {
+        showToast("No inquiries to export.", "error");
+        return;
+      }
+      
+      let csv = 'Inquiry ID,Sender Name,Phone,Email,Message Body,Date,Status\n';
+      messages.forEach(m => {
+        csv += `"${m.id}","${m.name.replace(/"/g, '""')}","${m.phone}","${m.email}","${m.message.replace(/"/g, '""')}","${m.date}","${m.status}"\n`;
+      });
+      
+      downloadCSVFile(csv, 'Sahara_Contact_Inquiries.csv');
+    }
+
+    function downloadCSVFile(csvContent, filename) {
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("CSV file downloaded successfully!");
+    }
+
+    /* SIMULATION & RESET HELPERS (PAGE 3) */
+    function clearAllData() {
+      if (confirm("CRITICAL ACTION: Are you sure you want to permanently clear all booking database records and contact inquiry logs? This cannot be undone.")) {
+        localStorage.setItem('sahara_bookings', '[]');
+        localStorage.setItem('sahara_messages', '[]');
+        refreshKPIs();
+        renderAdminBookings();
+        renderAdminMessages();
+        renderPopularityChart();
+        showToast("All databases successfully wiped clean.", "error");
+      }
+    }
+
+    function resetToMockData() {
+      if (confirm("Wipe active records and reload default sample mock databases?")) {
+        localStorage.removeItem('sahara_bookings');
+        localStorage.removeItem('sahara_messages');
+        
+        // This triggers the default data inside initMockData in script.js, which we reload here
+        window.location.reload();
+      }
+    }
+
+    function simulateRandomBooking() {
+      const patientNames = ["Pradeep Adhikari", "Manisha Giri", "Niraj Thapa", "Sunita Shrestha", "Binod Bhattarai", "Bipana Dahal", "Anil Khadka", "Ranjana Sharma"];
+      const emails = ["pradeep@gmail.com", "manisha.g@giri.com", "niraj.t@outlook.com", "sunita.s@gmail.com", "binod.b@yahoo.com", "bipana@live.com", "anil.k@mail.com", "ranjana.sharma@domain.np"];
+      const treatments = ["Laser Treatment", "Hair Transplant", "Allergy Test", "Botox and Fillers", "Cryotherapy", "Chemical Peeling", "PRP Therapy", "Teledermatology", "Mole Removal"];
+      const times = ["Morning", "Afternoon", "Evening"];
+      const notesList = ["Urgent consult desired.", "First session follow up.", "Review allergy history.", "Skin pigmentation checking.", "No special requirements.", "Looking forward to speaking with the HOD."];
+
+      const idx = Math.floor(Math.random() * patientNames.length);
+      const name = patientNames[idx];
+      const email = emails[idx];
+      const phone = '98' + Math.floor(10000000 + Math.random() * 90000000);
+      const treatment = treatments[Math.floor(Math.random() * treatments.length)];
+      const date = new Date(Date.now() + 86400000 * Math.floor(1 + Math.random() * 5)).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      const time = times[Math.floor(Math.random() * times.length)];
+      const notes = notesList[Math.floor(Math.random() * notesList.length)];
+      
+      const refId = 'SH-' + Math.floor(1000 + Math.random() * 9000);
+      const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+      
+      const newBooking = {
+        id: refId,
+        name,
+        phone,
+        email,
+        treatment,
+        date,
+        time,
+        notes,
+        createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        status: 'Pending'
+      };
+
+      bookings.unshift(newBooking);
+      localStorage.setItem('sahara_bookings', JSON.stringify(bookings));
+      
+      refreshKPIs();
+      renderAdminBookings();
+      renderPopularityChart();
+      showToast(`Simulated request ${refId} for ${name} added!`);
+    }
+  </script>
+</body>
+</html>
