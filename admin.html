@@ -804,74 +804,7 @@
       opacity: 1;
     }
 
-    /* Repo Sync Center Styling */
-    .sync-card {
-      background: linear-gradient(135deg, #0d2b45, #203c56);
-      color: white;
-      border-radius: 18px;
-      padding: 1.75rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(13, 43, 69, 0.15);
-    }
-    
-    .sync-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--navy-light);
-      margin-bottom: 0.5rem;
-    }
-    
-    .sync-meta {
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.65);
-      line-height: 1.5;
-      margin-bottom: 1.25rem;
-    }
-    
-    .sync-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      color: #90CAF9;
-      font-family: monospace;
-      margin-bottom: 0.75rem;
-    }
 
-    .sync-status-indicator {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #4CAF50;
-      box-shadow: 0 0 8px #4CAF50;
-    }
-
-    .console-terminal {
-      background: rgba(0,0,0,0.3);
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.85rem;
-      font-family: monospace;
-      font-size: 0.72rem;
-      color: #81C784;
-      max-height: 110px;
-      overflow-y: auto;
-      margin-top: 1rem;
-      line-height: 1.4;
-    }
-    
-    .console-line {
-      margin-bottom: 0.2rem;
-    }
-
-    .git-user-text {
-      color: var(--rose-gold-light);
-    }
     
     /* Interactive bar visualizer */
     .bar-chart-container {
@@ -1130,27 +1063,8 @@
           </div>
         </div>
 
-        <!-- Sync controls -->
+        <!-- Analytics Controls -->
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-          <div class="sync-card">
-            <div class="sync-badge">
-              <span class="sync-status-indicator"></span>
-              <span>main branch</span>
-            </div>
-            <h4>GitHub Repository Sync</h4>
-            <p class="sync-meta">Push local clinic database changes, bookings, and treatment modifications to the remote repository.</p>
-            
-            <button class="btn-primary" style="width: 100%; justify-content: center; background: #3ABEF9; font-weight:700; color:#0d2b45; box-shadow: 0 4px 15px rgba(58, 190, 249, 0.2);" onclick="simulatePushToRepo()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 17.25 4.5H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
-              Push Database to GitHub
-            </button>
-            
-            <div class="console-terminal" id="terminal-console-sync">
-              <div class="console-line">> Ready to synchronize clinic state.</div>
-              <div class="console-line">> Git Remote: <span class="git-user-text">devashishadmission1-svg/SaharaSkinClinic</span></div>
-            </div>
-          </div>
-
           <!-- Treatment Distribution Overview (Analytical chart) -->
           <div class="chart-section">
             <h3 class="chart-title">Treatment Popularity</h3>
@@ -1766,47 +1680,7 @@
       showToast(`Walk-in consultation ${refId} logged!`);
     }
 
-    /* REPOSITORY PUSH SIMULATION */
-    function simulatePushToRepo() {
-      const consoleEl = document.getElementById('terminal-console-sync');
-      
-      // Inject lines sequentially to simulate real Git push actions
-      const lines = [
-        `> git add index.html script.js style.css admin.html`,
-        `> git commit -m "feat(admin): integrated booking portal and localStorage DB synchronization v2.0.5"`,
-        `> git push origin main`,
-        `[main 9d2ef1c] feat(admin): integrated booking portal`,
-        ` 3 files changed, 252 insertions(+), 18 deletions(-)`,
-        `Compressing objects: 100% (14/14), done.`,
-        `Writing objects: 100% (18/18), 3.42 KiB | 875.00 KiB/s, done.`,
-        `To https://github.com/devashishadmission1-svg/SaharaSkinClinic`,
-        `   b509dfc..9d2ef1c  main -> main`,
-        `> SUCCESS: Clinic database and portal assets deployed to GitHub Pages! 🎉`
-      ];
 
-      consoleEl.innerHTML = '<div class="console-line">> Initializing git handshake...</div>';
-      
-      lines.forEach((line, index) => {
-        setTimeout(() => {
-          const lineEl = document.createElement('div');
-          lineEl.className = 'console-line';
-          if (line.startsWith('[') || line.includes('Writing') || line.includes('Compressing')) {
-            lineEl.style.color = 'var(--text-muted)';
-          } else if (line.includes('SUCCESS')) {
-            lineEl.style.color = '#81C784';
-            lineEl.style.fontWeight = '700';
-            showToast("Repository updated and pushed! Deployed via deploy.yml.");
-          } else if (line.startsWith('> git')) {
-            lineEl.innerHTML = `<span style="color:var(--rose-gold-light)">${line.substring(0,5)}</span>${line.substring(5)}`;
-          } else {
-            lineEl.style.color = '#FFF';
-          }
-          lineEl.textContent = line;
-          consoleEl.appendChild(lineEl);
-          consoleEl.scrollTop = consoleEl.scrollHeight;
-        }, (index + 1) * 600);
-      });
-    }
 
     /* EXPORT UTILITIES */
     function exportBookingsToCSV() {
