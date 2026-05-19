@@ -364,6 +364,100 @@ function initSmoothScroll() {
   });
 }
 
+function initStatusTracker() {
+  const form = document.getElementById('tracker-form');
+  const input = document.getElementById('tracker-ref-id');
+  const results = document.getElementById('tracker-results');
+  if (!form || !input || !results) return;
+  
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const query = input.value.trim().toUpperCase();
+    if (!query) return;
+    
+    const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
+    const found = bookings.find(b => b.id.toUpperCase() === query);
+    
+    results.style.display = 'block';
+    results.style.opacity = '0';
+    results.style.transform = 'translateY(10px)';
+    results.style.transition = 'all 0.35s ease';
+    
+    if (found) {
+      let statusColor = 'var(--rose-gold)';
+      let statusBg = 'rgba(209,30,105,0.04)';
+      let statusDesc = '';
+      
+      if (found.status === 'Pending') {
+        statusColor = '#B27B00';
+        statusBg = '#FFF9E6';
+        statusDesc = 'Your request has been received and is currently under review by our medical coordination team. We will call or email you shortly to finalize your exact time slot.';
+      } else if (found.status === 'Confirmed') {
+        statusColor = '#00897B';
+        statusBg = '#E6F8F5';
+        statusDesc = 'Congratulations! Your appointment has been officially confirmed. We look forward to welcoming you at Sahara Skin Hospital. If you need to reschedule, please call our front desk directly at +977-1-5247316.';
+      } else if (found.status === 'Completed') {
+        statusColor = '#2E7D32';
+        statusBg = '#E8F5E9';
+        statusDesc = 'This consultation has been successfully completed. Thank you for choosing Dr. Prabin Dhakal and Sahara Skin Clinic for your skin health journey!';
+      } else if (found.status === 'Cancelled') {
+        statusColor = '#C62828';
+        statusBg = '#FFEBEE';
+        statusDesc = 'This appointment request has been cancelled or rejected. If you believe this is an error, would like to inquire about the cancellation, or want to schedule a new time slot, please call us directly at +977-1-5247316.';
+      }
+      
+      results.innerHTML = `
+        <div style="background: ${statusBg}; border-left: 4px solid ${statusColor}; border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: left;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <h4 style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--navy-dark); font-weight: 700; margin: 0 0 0.15rem 0;">${found.name}</h4>
+              <p style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500; margin: 0;">Reference Code: <strong style="font-family: monospace; color: var(--navy); font-size: 0.85rem;">${found.id}</strong></p>
+            </div>
+            <span style="display: inline-flex; align-items: center; padding: 0.35rem 0.8rem; border-radius: 9999px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #fff; border: 1.5px solid ${statusColor}; color: ${statusColor};">
+              ${found.status}
+            </span>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; background: rgba(255,255,255,0.7); padding: 0.85rem 1.25rem; border-radius: 10px; border: 1px solid rgba(0,0,0,0.03);">
+            <div>
+              <p style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin: 0;">Treatment Focus</p>
+              <p style="font-size: 0.9rem; font-weight: 600; color: var(--navy-dark); margin: 0.15rem 0 0 0;">${found.treatment}</p>
+            </div>
+            <div>
+              <p style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin: 0;">Scheduled Date & Slot</p>
+              <p style="font-size: 0.9rem; font-weight: 600; color: var(--navy-dark); margin: 0.15rem 0 0 0;">${found.date} (${found.time})</p>
+            </div>
+          </div>
+          
+          <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-body); font-weight: 500; margin: 0;">
+            ${statusDesc}
+          </div>
+        </div>
+      `;
+    } else {
+      results.innerHTML = `
+        <div style="background: #FFEBEE; border-left: 4px solid #C62828; border-radius: 12px; padding: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; text-align: left;">
+          <div style="width: 32px; height: 32px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #C62828; flex-shrink: 0; border: 1px solid rgba(198,40,40,0.2);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.05rem; color: #C62828; font-weight: 700; margin: 0 0 0.15rem 0;">Reference ID Not Found</h4>
+            <p style="font-size: 0.82rem; line-height: 1.5; color: #C62828; margin: 0;">
+              We couldn't locate any appointment matching reference ID <strong style="font-family: monospace;">"${query}"</strong> in our active database. Please double-check the spelling (e.g. SH-1234) or call our helpdesk for support.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Animate presentation
+    setTimeout(() => {
+      results.style.opacity = '1';
+      results.style.transform = 'translateY(0)';
+    }, 50);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initMockData();
   renderTreatments();
@@ -377,7 +471,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initContactForm();
   initBookingForm();
+  initStatusTracker();
   initSmoothScroll();
   setTimeout(initReveal, 50);
-  console.log("Sahara Skin Clinic — Modernized v2.0.4 with Booking System");
+  console.log("Sahara Skin Clinic — Modernized v2.0.5 with Status Tracker");
 });

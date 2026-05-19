@@ -361,6 +361,38 @@
   </style>
 </section>
 
+<!-- Booking Status Tracker Section -->
+<section id="status-tracker" style="background: var(--cream-dark); padding: 4.5rem 0; border-top: 1px solid rgba(209,30,105,0.1); border-bottom: 1px solid rgba(209,30,105,0.1);">
+  <div class="container">
+    <div style="max-width: 650px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 2.5rem">
+        <span class="section-eyebrow reveal" style="text-align: center;">Check Your Booking</span>
+        <h2 class="section-title reveal reveal-delay-1" style="font-size: 2rem; margin-bottom: 0.75rem; text-align: center;">Track Consultation Status</h2>
+        <div class="divider reveal reveal-delay-2" style="margin: 0.5rem auto 1rem;"></div>
+        <p class="section-subtitle reveal reveal-delay-2" style="margin-top: 1rem; text-align: center; color: var(--text-muted); font-size: 0.95rem;">
+          Enter your unique reference ID (e.g. SH-7891) below to view your real-time appointment schedule and doctor verification logs.
+        </p>
+      </div>
+      
+      <div class="reveal reveal-delay-3" style="background: #ffffff; border: 1.5px solid rgba(209,30,105,0.12); border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 132, 180, 0.04);">
+        <form id="tracker-form" style="display: flex; gap: 0.75rem; margin-bottom: 0; justify-content: center; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 250px;">
+            <input type="text" id="tracker-ref-id" class="form-input" placeholder="Enter Reference ID (e.g. SH-7891)" required aria-required="true" style="border-color: rgba(0,132,180,0.15); height: 48px; text-transform: uppercase; font-weight: 600; text-align: center; font-size: 1rem;"/>
+          </div>
+          <button type="submit" class="btn-primary" style="height: 48px; border-radius: 10px; padding: 0 2rem; font-weight: 700; white-space: nowrap; background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-dark)); border: none; box-shadow: 0 4px 15px rgba(209,30,105,0.25);">
+            Track Status
+          </button>
+        </form>
+        
+        <!-- Results container -->
+        <div id="tracker-results" style="display: none; margin-top: 1.75rem; text-align: left; border-top: 1.5px solid rgba(209,30,105,0.08); padding-top: 1.5rem;">
+          <!-- Content populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Contact -->
 <section id="contact">
   <div class="container">
