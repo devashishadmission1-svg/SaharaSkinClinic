@@ -424,7 +424,7 @@ function performTrackerSearch(query) {
     } else if (found.status === 'Confirmed') {
       statusColor = '#00897B';
       statusBg = '#E6F8F5';
-      statusDesc = 'Congratulations! Your appointment has been officially confirmed. We look forward to welcoming you at Sahara Skin Hospital. If you need to reschedule, please call our front desk directly at +977-1-5247316.';
+      statusDesc = 'Congratulations! Your appointment has been officially confirmed. We look forward to welcoming you at Sahara Skin Hospital. If you need to reschedule, please call our front desk directly at 986-1668445.';
     } else if (found.status === 'Completed') {
       statusColor = '#2E7D32';
       statusBg = '#E8F5E9';
@@ -432,7 +432,7 @@ function performTrackerSearch(query) {
     } else if (found.status === 'Cancelled') {
       statusColor = '#C62828';
       statusBg = '#FFEBEE';
-      statusDesc = 'This appointment request has been cancelled or rejected. If you believe this is an error, would like to inquire about the cancellation, or want to schedule a new time slot, please call us directly at +977-1-5247316.';
+      statusDesc = 'This appointment request has been cancelled or rejected. If you believe this is an error, would like to inquire about the cancellation, or want to schedule a new time slot, please call us directly at 986-1668445.';
     }
     
     results.innerHTML = `
