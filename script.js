@@ -351,7 +351,6 @@ function initBookingForm() {
       const email = document.getElementById('booking-email').value;
       const treatment = document.getElementById('booking-treatment').value;
       const date = document.getElementById('booking-date').value;
-      const time = document.getElementById('booking-time').value;
       const notes = document.getElementById('booking-notes').value || 'No extra notes.';
       
       const refId = 'SH-' + Math.floor(1000 + Math.random() * 9000);
@@ -364,7 +363,7 @@ function initBookingForm() {
         email,
         treatment,
         date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time,
+
         notes,
         createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Pending'
@@ -377,8 +376,7 @@ function initBookingForm() {
       publicRegistry[refId.toUpperCase()] = {
         status: 'Pending',
         treatment,
-        date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time
+        date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
       };
       localStorage.setItem('sahara_public_status', JSON.stringify(publicRegistry));
       
@@ -418,7 +416,6 @@ function initMockData() {
         email: 'devashish@example.com',
         treatment: 'Laser Treatment',
         date: new Date(Date.now() + 86400000 * 2).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time: 'Afternoon',
         notes: 'Interested in laser resurfacing for minor acne scars.',
         createdAt: new Date(Date.now() - 3600000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Confirmed'
@@ -430,7 +427,6 @@ function initMockData() {
         email: 'aayusha.s@domain.com',
         treatment: 'Allergy Test',
         date: new Date(Date.now() + 86400000 * 4).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time: 'Morning',
         notes: 'Allergy patches for sensitive skin testing.',
         createdAt: new Date(Date.now() - 3600000 * 12).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Pending'
@@ -442,7 +438,6 @@ function initMockData() {
         email: 'rohan.basnet@live.com',
         treatment: 'PRP Therapy',
         date: new Date(Date.now() + 86400000 * 1).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time: 'Evening',
         notes: 'PRP session for hair thinning.',
         createdAt: new Date(Date.now() - 3600000 * 24).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Pending'
@@ -454,7 +449,6 @@ function initMockData() {
         email: 'sita.k@gmail.com',
         treatment: 'Chemical Peeling',
         date: new Date(Date.now() - 86400000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time: 'Afternoon',
         notes: 'Follow-up chemical peeling appointment.',
         createdAt: new Date(Date.now() - 86400000 * 5).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Completed'
@@ -471,8 +465,7 @@ function initMockData() {
       publicRegistry[b.id.toUpperCase()] = {
         status: b.status,
         treatment: b.treatment,
-        date: b.date,
-        time: b.time
+        date: b.date
       };
     });
     localStorage.setItem('sahara_public_status', JSON.stringify(publicRegistry));
@@ -572,7 +565,7 @@ function performTrackerSearch(query) {
           </div>
           <div>
             <p style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin: 0;">Scheduled Date & Slot</p>
-            <p style="font-size: 0.9rem; font-weight: 600; color: var(--navy-dark); margin: 0.15rem 0 0 0;">${found.date} (${found.time})</p>
+            <p style="font-size: 0.9rem; font-weight: 600; color: var(--navy-dark); margin: 0.15rem 0 0 0;">${found.date}</p>
           </div>
         </div>
         
