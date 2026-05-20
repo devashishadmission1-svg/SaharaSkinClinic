@@ -64,9 +64,12 @@ const treatments = [
 ];
 
 const reviews = [
-  { text:'Excellent service and professional care. Dr. Dhakal is truly amazing!', name:'Sarah M.', role:'Laser Treatment Patient' },
-  { text:'Best laser hair removal experience in Kathmandu. Highly recommended!', name:'Rajesh K.', role:'Hair Removal Patient' },
-  { text:'Finally found a solution for my chronic acne. Thank you Sahara!', name:'Priya S.', role:'Acne Treatment Patient' }
+  { text:'Best skin clinic in Kathmandu. Dr. Prabin Dhakal is extremely polite, listens patiently, and explains the treatment path beautifully. My long-term chronic acne has been completely cured under his expert care.', name:'Anil Shrestha', role:'Acne Treatment Patient' },
+  { text:'Highly satisfied with the laser hair removal treatment here. The clinic features state-of-the-art triple wavelength laser technology, the staff is incredibly supportive, and the prices are very reasonable compared to other clinics.', name:'Ritu Baral', role:'Laser Hair Removal Patient' },
+  { text:'Excellent experience getting warts removed from my face. The procedure was extremely sterile, virtually painless, and done with great precision. The healing was fast and there are no scars left!', name:'Shreya Sharma', role:'Warts & Skin Tags Patient' },
+  { text:'Highly recommend Sahara Skin Care Hospital for ZSR Circumcision. The modern stapler technique is safe, clean, and has very fast recovery. Dr. Dhakal and the clinical team made me very comfortable throughout.', name:'Ramesh K.C.', role:'ZSR Circumcision Patient' },
+  { text:'Was suffering from severe hair thinning and went for GFC (Growth Factor Concentrate) therapy. After just three sessions under Dr. Dhakal, my hair fall completely stopped and I can see visible new growth. Truly reliable skin and hair care!', name:'Bikash Thapa', role:'GFC Hair Therapy Patient' },
+  { text:'Wonderful service for skin allergies. The allergy patch testing is highly accurate, and the customized treatment plan worked wonders for my chronic eczema. A very professional and hygienic clinic in Kalanki!', name:'Maya Tamang', role:'Allergy & Eczema Patient' }
 ];
 
 function renderTreatments() {
