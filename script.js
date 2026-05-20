@@ -34,33 +34,75 @@ function initMarquee() {
 
 const treatments = [
   { title:'Laser Treatment', desc:'Uses laser technology for pigmentation, scars, hair removal and skin resurfacing.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>',
+    meta:'Duration: 30–60 mins | Downtime: 1–3 days | Target: Scars & Rejuvenation',
+    details:'Our advanced triple-wavelength laser systems target hyperpigmentation, deep post-acne scars, fine wrinkles, and general skin irregularities. By safely delivering thermal energy to precise depths, the treatment stimulates robust neocollagenesis (new collagen growth) to yield tighter pores, smoother skin, and a uniform skin tone with minimal downtime.',
+    bullets:['<strong>Recommended Sessions:</strong> 3 to 5 sessions depending on clinical depth','<strong>Anesthesia:</strong> Topical numbing cream applied for absolute patient comfort','<strong>Primary Benefits:</strong> Evens out skin texture, fades age spots, and tightens pores'] },
   { title:'Hair Transplant', desc:'Surgical procedure to restore hair in bald or thinning areas.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/>',
+    meta:'Duration: 4–8 hours | Downtime: 7–10 days | Target: Hair Restoration',
+    details:'We utilize gold-standard Follicular Unit Extraction (FUE) and Direct Hair Implantation (DHI) methods under sterile local anesthesia. Individual healthy hair follicles are harvested meticulously from the donor region (back of the head) and implanted at precise angles and densities in thinning or bald regions, guaranteeing a natural hairline and permanent lifetime survival.',
+    bullets:['<strong>Technique:</strong> Painless micro-punch extraction with zero linear scarring','<strong>Recovery:</strong> Swelling subsides in 3 days; donor zone heals fully in 7 days','<strong>Success Rate:</strong> Over 95% graft survival with lifetime natural growth'] },
   { title:'Allergy Test', desc:'Comprehensive patch and prick tests to identify substances causing skin allergies.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 1-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21a48.309 48.309 0 0 1-8.135-1.587c-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 1-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21a48.309 48.309 0 0 1-8.135-1.587c-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>',
+    meta:'Duration: 30 mins | Downtime: None | Target: Allergen Discovery',
+    details:'Comprehensive medical patch testing and skin prick assays to determine the absolute root cause of contact dermatitis, hives, and chronic skin irritation. Over 30 common Nepalese environmental and chemical antigens are tested under dermatologist supervision, followed by personalized avoidance counseling.',
+    bullets:['<strong>Reading Time:</strong> Results evaluated at 48 hours and 72 hours','<strong>Preparation:</strong> Patients must avoid antihistamines for 5 days prior to the test','<strong>Includes:</strong> Customized allergen avoidance guidelines and skin barrier support'] },
   { title:'Botox and Fillers', desc:'Cosmetic injections to reduce wrinkles and restore facial volume.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>',
+    meta:'Duration: 15–30 mins | Downtime: None | Target: Wrinkles & Volume',
+    details:'Premium US FDA-approved neuromodulator (Botox) and hyaluronic acid dermal fillers administered with medical precision. Designed to smooth dynamic wrinkles (crow\'s feet, frown lines) and instantly restore volume to hollow cheeks, tear troughs, flat lips, and weak jawlines while preserving highly natural expressions.',
+    bullets:['<strong>Onset:</strong> Fillers are instant; Botox takes 3 to 7 days for full effect','<strong>Longevity:</strong> Botox lasts 4–6 months; Fillers last 9–18 months','<strong>Treatment Safety:</strong> Performed exclusively by certified dermatologist Dr. Dhakal'] },
   { title:'Cryotherapy', desc:'Extreme cold treatment to remove warts, skin tags and other benign skin lesions.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18-3 3m3-3 3 3M3 12h18m-18 0 3 3m-3-3 3-3m12 3-3 3m3-3-3-3m-6-6 3 9-9-3 9 3-3 9-3-9-9 3 9-3-3-9Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18-3 3m3-3 3 3M3 12h18m-18 0 3 3m-3-3 3-3m12 3-3 3m3-3-3-3m-6-6 3 9-9-3 9 3-3 9-3-9-9 3 9-3-3-9Z"/>',
+    meta:'Duration: 10–15 mins | Downtime: 3–5 days | Target: Lesion Removal',
+    details:'Controlled cryo-ablation utilizing medical liquid nitrogen at -196°C. This targeted freezing technique isolates and destroys viral warts, skin tags, seborrheic keratoses, and other benign skin lesions. The treated cells gently blister and slough off within a few days, replaced by fresh healthy tissue.',
+    bullets:['<strong>Pain Level:</strong> Mild, brief stinging sensation during cold application','<strong>Aseptic Standard:</strong> Zero surgical incisions required, meaning zero blood risk','<strong>Healing Time:</strong> Lesions completely crust and peel away in 5 to 7 days'] },
   { title:'Chemical Peeling', desc:'Chemical solution applied to improve texture, tone, and remove damaged skin cells.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"/>',
+    meta:'Duration: 20–30 mins | Downtime: 2–5 days | Target: Acne & Glow',
+    details:'Dermatologist-formulated chemical peels (Glycolic, Salicylic, Lactic, and Jessner\'s solutions) customized for your skin concern. Peels exfoliate damaged outer epidermal layers to speed up cell turnover, resulting in significant reduction of active acne, post-inflammatory hyperpigmentation, sunspots, and fine lines.',
+    bullets:['<strong>Skin Types:</strong> Safe for all Fitzpatrick skin types when customized','<strong>Post-Care:</strong> Broad-spectrum SPF 50+ sunscreen application is strictly mandatory','<strong>Primary Benefits:</strong> Unveils luminous skin, controls sebum, and fades melasma'] },
   { title:'Mole Removal', desc:'Safe procedures to remove unwanted moles, skin tags, or other benign growths.',
-    icon:'<circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3Z"/>' },
+    icon:'<circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3Z"/>',
+    meta:'Duration: 15–30 mins | Downtime: 5–7 days | Target: Growth Cautery',
+    details:'Safe and painless removal of cosmetic or medically concerning moles, cysts, and benign skin growths. Depending on lesion depth, we employ high-frequency radiofrequency (RF) cautery for sutureless surface clearing, or precise surgical excision with advanced plastic closures to ensure the most cosmetic, scar-free outcome.',
+    bullets:['<strong>Anesthesia:</strong> Local anesthetic infiltration for a completely painless procedure','<strong>Safety Protocol:</strong> Suspect moles can be sent for biopsy histopathology','<strong>Aftercare:</strong> Silicon gel and micro-pore tape provided for optimal scar healing'] },
   { title:'Teledermatology', desc:'Remote dermatology consultations via video or digital imaging technology.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/>',
+    meta:'Duration: 15 mins (Virtual) | Downtime: None | Target: Online Skin Care',
+    details:'Fully secure, HD video and photo-based digital teleconsultation gateway with Dr. Prabin Dhakal. Ideal for patients living outside Kathmandu or abroad, teledermatology covers initial skin diagnoses, routine treatment updates, hair loss monitoring, prescription renewals, and chronic care management.',
+    bullets:['<strong>Convenience:</strong> Book online, upload clear photos, and receive prescription digitally','<strong>Scope:</strong> Suitable for acne, eczema, psoriasis, hair fall, and general skincare','<strong>Follow-ups:</strong> Smooth digital coordination for reviewing treatment progress'] },
   { title:'PRP Therapy', desc:"Platelet-Rich Plasma from the patient's own blood to stimulate hair growth and skin repair.",
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75v-1.5a3.375 3.375 0 0 0-3.375-3.375h-1.5A3.375 3.375 0 0 0 7.5 14.25v1.5m9.75-9 .75-.75m-4.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75v-1.5a3.375 3.375 0 0 0-3.375-3.375h-1.5A3.375 3.375 0 0 0 7.5 14.25v1.5m9.75-9 .75-.75m-4.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/>',
+    meta:'Duration: 45–60 mins | Downtime: None | Target: Regrowth & Repair',
+    details:'Autologous Platelet-Rich Plasma (PRP) and Growth Factor Concentrate (GFC) therapies. A small volume of your blood is centrifuged to extract highly concentrated platelets, which are micro-injected into the hair roots or facial skin to release essential growth factors that revive thinning hair follicles and promote collagen repair.',
+    bullets:['<strong>Protocol:</strong> Highly sterile, closed-system centrifugation for pure GFC','<strong>Treatment Intervals:</strong> Recommended 4 sessions spaced 4 weeks apart','<strong>Results:</strong> Visible reduction in hair shedding in 2 sessions; new growth in 3'] },
   { title:'Cosmetic Surgery', desc:'Minor surgical procedures to enhance skin appearance and correct cosmetic concerns.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>',
+    meta:'Duration: 30–90 mins | Downtime: 5–10 days | Target: Outpatient Plastics',
+    details:'Minor outpatient plastic and reconstructive surgeries conducted under sterile conditions. Services include split earlobe repairs, cosmetic scar revisions, sebaceous cyst excision, lipoma removal, and skin tag removals. We employ advanced micro-suturing techniques to achieve thin, virtually invisible scars.',
+    bullets:['<strong>Suture Removal:</strong> Typically scheduled 5 to 7 days post-surgery','<strong>Pain Management:</strong> Mild oral analgesics prescribed for post-op comfort','<strong>Primary Goal:</strong> Restoration of normal anatomy with superior cosmetic results'] },
   { title:'Skin Analyzer', desc:'Advanced device to analyze skin condition — oil balance, moisture, pigmentation, pores.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>',
+    meta:'Duration: 15 mins | Downtime: None | Target: Multi-Spectral Scan',
+    details:'Advanced multi-spectral facial diagnostic technology utilizing standard light, cross-polarized, and UV light arrays. The scanner deeply analyzes hidden sebum distribution, deep pore clogging, vascular lesions, underlying UV sun damage, and early wrinkle patterns, providing a highly objective foundation for clinical care.',
+    bullets:['<strong>Report:</strong> Detailed digital skin report showing sebum, pores, and vascular states','<strong>Diagnostic Power:</strong> Unveils deep sun spots and pigment before they surface','<strong>Skin Age:</strong> Evaluates realistic skin metabolic age compared to actual age'] },
   { title:'ZSR Circumcision', desc:'Modern stapler-based circumcision method for minimal pain and faster recovery.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>',
+    meta:'Duration: 15–20 mins | Downtime: 3–5 days | Target: Stapler Circumcision',
+    details:'The modern gold-standard stapler circumcision technique, highly superior to traditional laser or open surgeries. Using a disposable ZSR stapler device, the procedure cuts and staples in one single fluid motion, resulting in virtually zero blood loss, precise circular alignment, and minimal post-op swelling.',
+    bullets:['<strong>Advantages:</strong> Minimizes infection risks, has no loose threads, and heals fast','<strong>Recovery:</strong> Painless dressings; patients can return to light work in 24 hours','<strong>Age Group:</strong> Extremely safe and highly recommended for adolescent and adult males'] },
   { title:'Photo Therapy', desc:'Light-based UV treatment for chronic skin conditions like psoriasis, eczema and vitiligo.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>' },
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>',
+    meta:'Duration: 5–15 mins | Downtime: None | Target: Narrowband UVB Light',
+    details:'Narrowband UVB (NBUVB) light-based phototherapy. Safely administers clinically calibrated light wavelengths to suppress hyperactive immune responses in the skin. This highly controlled medical therapy is exceptionally effective for clearing moderate-to-severe psoriasis, vitiligo patches, and chronic eczema.',
+    bullets:['<strong>Safety Profile:</strong> Safe for pregnant women and pediatric patients, free of systemic drugs','<strong>Session Frequency:</strong> Usually performed 2 to 3 times per week','<strong>Clinical Efficacy:</strong> Excellent track record in bringing stable psoriasis to remission'] },
   { title:'Vitiligo Surgery', desc:'Surgical skin grafting and melanocyte transplant to restore pigment in vitiligo patches.',
-    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/>' }
+    icon:'<path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/>',
+    meta:'Duration: 1–3 hours | Downtime: 7–14 days | Target: Pigment Grafting',
+    details:'Advanced surgical repigmentation techniques for stable vitiligo patches. When patches have stopped spreading for over a year and are unresponsive to medical therapy, we perform precise suction blister grafting, punch grafting, or advanced non-cultured melanocyte-keratinocyte transplant (MKCT) to restore melanin production.',
+    bullets:['<strong>Candidates:</strong> Suitable only for patients with stable, non-spreading vitiligo','<strong>Methods:</strong> Latest MKCT allows large vitiligo patches to be covered with small donor skin','<strong>Pigment Recovery:</strong> Natural repigmentation gradually blends over 3 to 6 months'] }
 ];
 
 const reviews = [
@@ -76,7 +118,7 @@ function renderTreatments() {
   const grid = document.getElementById('treatments-grid');
   if (!grid) return;
   grid.innerHTML = treatments.map((t, i) => `
-    <div class="treatment-card reveal reveal-delay-${(i % 6) + 1}">
+    <div class="treatment-card reveal reveal-delay-${(i % 6) + 1}" data-index="${i}">
       <div class="card-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">${t.icon}</svg>
       </div>
@@ -86,6 +128,82 @@ function renderTreatments() {
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
       </span>
     </div>`).join('');
+}
+
+function initTreatmentModal() {
+  const grid = document.getElementById('treatments-grid');
+  const modal = document.getElementById('treatment-modal');
+  if (!grid || !modal) return;
+  
+  const mIcon = document.getElementById('modal-treatment-icon');
+  const mTitle = document.getElementById('modal-treatment-title');
+  const mMeta = document.getElementById('modal-treatment-meta');
+  const mDesc = document.getElementById('modal-treatment-description');
+  const mBullets = document.getElementById('modal-treatment-quick-info');
+  
+  const closeBtnTop = document.getElementById('close-treatment-modal');
+  const closeBtnBot = document.getElementById('modal-close-btn');
+  const bookBtn = document.getElementById('modal-book-btn');
+  
+  const closeModal = () => {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      if (!modal.classList.contains('show')) {
+        modal.style.display = 'none';
+      }
+    }, 300);
+  };
+  
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.treatment-card');
+    if (!card) return;
+    
+    const idx = parseInt(card.getAttribute('data-index'), 10);
+    const t = treatments[idx];
+    if (!t) return;
+    
+    mIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">${t.icon}</svg>`;
+    mTitle.textContent = t.title;
+    mMeta.textContent = t.meta || 'Expert Dermatology Care';
+    mDesc.textContent = t.details || t.desc;
+    
+    if (t.bullets && t.bullets.length > 0) {
+      mBullets.style.display = 'flex';
+      mBullets.innerHTML = t.bullets.map(b => `
+        <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="color: var(--rose-gold-dark); flex-shrink: 0; margin-top: 2px;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          <div>${b}</div>
+        </div>
+      `).join('');
+    } else {
+      mBullets.style.display = 'none';
+    }
+    
+    modal.style.display = 'flex';
+    modal.offsetHeight; // force reflow
+    modal.classList.add('show');
+  });
+  
+  closeBtnTop && closeBtnTop.addEventListener('click', closeModal);
+  closeBtnBot && closeBtnBot.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+  
+  bookBtn && bookBtn.addEventListener('click', () => {
+    const treatmentTitle = mTitle.textContent;
+    closeModal();
+    
+    const bookingSec = document.getElementById('booking');
+    if (bookingSec) {
+      bookingSec.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    const selectEl = document.getElementById('booking-treatment');
+    if (selectEl) {
+      selectEl.value = treatmentTitle;
+    }
+  });
 }
 
 function renderReviews() {
@@ -527,6 +645,7 @@ function initStatusTracker() {
 document.addEventListener('DOMContentLoaded', () => {
   initMockData();
   renderTreatments();
+  initTreatmentModal();
   renderReviews();
   initCycler();
   initMarquee();
@@ -540,5 +659,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initStatusTracker();
   initSmoothScroll();
   setTimeout(initReveal, 50);
-  console.log("Sahara Skin Clinic — Modernized v2.0.6 with Status Tracker");
+  console.log("Sahara Skin Clinic — Modernized v2.0.8 with Treatment Details Modal");
 });

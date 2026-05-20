@@ -1089,6 +1089,37 @@
         </button>
       </div>
 
+      <!-- Inquiries KPIs -->
+      <section class="kpi-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 2rem;">
+        <div class="kpi-card total">
+          <div>
+            <p class="kpi-label">Total Inquiries</p>
+            <p class="kpi-value" id="kpi-total-messages">0</p>
+          </div>
+          <div class="kpi-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+          </div>
+        </div>
+        <div class="kpi-card pending" style="--rose-gold: #e91e63;">
+          <div>
+            <p class="kpi-label">Unread Messages</p>
+            <p class="kpi-value" id="kpi-unread-messages">0</p>
+          </div>
+          <div class="kpi-icon-wrap" style="background: rgba(233,30,105,0.08); color: #e91e63;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 9v.906a2.25 2.25 0 0 1-1.183 1.961l-7.382 4.026a2.25 2.25 0 0 1-2.17 0L3.633 11.87A2.25 2.25 0 0 1 2.25 9.907V9"/></svg>
+          </div>
+        </div>
+        <div class="kpi-card completed" style="--green: #4CAF50;">
+          <div>
+            <p class="kpi-label">Replied Inquiries</p>
+            <p class="kpi-value" id="kpi-replied-messages">0</p>
+          </div>
+          <div class="kpi-icon-wrap" style="background: rgba(76,175,80,0.08); color: #4CAF50;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          </div>
+        </div>
+      </section>
+
       <div class="table-section">
         <div class="table-header-controls">
           <div class="filter-controls">
@@ -1142,7 +1173,7 @@
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
         
         <!-- Database tools -->
         <div class="table-section" style="padding: 2rem; gap: 1.5rem;">
@@ -1171,6 +1202,19 @@
             
             <button class="btn-primary" style="align-self: flex-start;" onclick="simulateRandomBooking()">
               Simulate 1 New Patient Request
+            </button>
+          </div>
+        </div>
+
+        <!-- Message Simulation -->
+        <div class="table-section" style="padding: 2rem; gap: 1.5rem;">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--navy-dark); font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">Simulate Contact Inquiry</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <p style="font-size: 0.88rem; color: var(--text-body); line-height: 1.6;">Instantly inject a randomly generated patient contact inquiry into the active contact database.</p>
+            
+            <button class="btn-primary" style="align-self: flex-start; background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-dark)); border: none; box-shadow: 0 4px 15px rgba(209, 30, 105, 0.25);" onclick="simulateRandomMessage()">
+              Simulate 1 Contact Message
             </button>
           </div>
         </div>
@@ -1388,10 +1432,23 @@
       const confirmed = bookings.filter(b => b.status === 'Confirmed').length;
       const completed = bookings.filter(b => b.status === 'Completed').length;
       
-      document.getElementById('kpi-total-bookings').textContent = total;
-      document.getElementById('kpi-pending-bookings').textContent = pending;
-      document.getElementById('kpi-confirmed-bookings').textContent = confirmed;
-      document.getElementById('kpi-completed-bookings').textContent = completed;
+      const totalEl = document.getElementById('kpi-total-bookings');
+      if (totalEl) totalEl.textContent = total;
+      const pendingEl = document.getElementById('kpi-pending-bookings');
+      if (pendingEl) pendingEl.textContent = pending;
+      const confirmedEl = document.getElementById('kpi-confirmed-bookings');
+      if (confirmedEl) confirmedEl.textContent = confirmed;
+      const completedEl = document.getElementById('kpi-completed-bookings');
+      if (completedEl) completedEl.textContent = completed;
+
+      // Contact Inquiries metrics
+      const messages = JSON.parse(localStorage.getItem('sahara_messages') || '[]');
+      const msgTotalEl = document.getElementById('kpi-total-messages');
+      if (msgTotalEl) msgTotalEl.textContent = messages.length;
+      const msgUnreadEl = document.getElementById('kpi-unread-messages');
+      if (msgUnreadEl) msgUnreadEl.textContent = messages.filter(m => m.status === 'Unread').length;
+      const msgRepliedEl = document.getElementById('kpi-replied-messages');
+      if (msgRepliedEl) msgRepliedEl.textContent = messages.filter(m => m.status === 'Replied').length;
     }
 
     /* BOOKINGS DATABASE RENDERING */
@@ -1579,6 +1636,7 @@
         messages[index].status = messages[index].status === 'Unread' ? 'Replied' : 'Unread';
         localStorage.setItem('sahara_messages', JSON.stringify(messages));
         renderAdminMessages();
+        refreshKPIs();
         showToast("Inquiry status toggled.");
       }
     }
@@ -1589,6 +1647,7 @@
         messages = messages.filter(m => m.id !== id);
         localStorage.setItem('sahara_messages', JSON.stringify(messages));
         renderAdminMessages();
+        refreshKPIs();
         showToast("Message logs deleted.", "error");
       }
     }
@@ -1791,6 +1850,47 @@
       renderAdminBookings();
       renderPopularityChart();
       showToast(`Simulated request ${refId} for ${name} added!`);
+    }
+
+    function simulateRandomMessage() {
+      const inquirerNames = ["Kshitiz Shrestha", "Pooja Adhikari", "Arjun Karki", "Saraswati Bhattarai", "Dipesh Shrestha", "Kabita Thapa", "Subash KC", "Rachana Giri"];
+      const emails = ["kshitiz@example.com", "pooja.a@gmail.com", "arjun.k@live.com", "sara@outlook.com", "dipesh.s@yahoo.com", "kabita@domain.np", "subash@mail.com", "rachana@gmail.com"];
+      const messagesList = [
+        "What are the charges for laser treatment for acne scars?",
+        "Do you have patch test slots available this Wednesday afternoon?",
+        "Is Dr. Prabin Dhakal available for consultation this Friday?",
+        "Can I get full details on Growth Factor Concentrate (GFC) therapy sessions?",
+        "Do you offer skin whitening treatments and chemical peels?",
+        "Are your teledermatology services active on Saturdays?",
+        "Is modern ZSR Circumcision safe for adults and how long is the recovery?",
+        "What is the full face laser hair removal price package?"
+      ];
+
+      const idx = Math.floor(Math.random() * inquirerNames.length);
+      const name = inquirerNames[idx];
+      const email = emails[idx];
+      const phone = '98' + Math.floor(10000000 + Math.random() * 90000000);
+      const message = messagesList[Math.floor(Math.random() * messagesList.length)];
+      
+      const msgId = 'MSG-' + Math.floor(1000 + Math.random() * 9000);
+      const messages = JSON.parse(localStorage.getItem('sahara_messages') || '[]');
+      
+      const newMsg = {
+        id: msgId,
+        name,
+        email,
+        phone,
+        message,
+        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        status: 'Unread'
+      };
+
+      messages.unshift(newMsg);
+      localStorage.setItem('sahara_messages', JSON.stringify(messages));
+      
+      refreshKPIs();
+      renderAdminMessages();
+      showToast(`Simulated inquiry ${msgId} from ${name} received!`);
     }
   </script>
 </body>
