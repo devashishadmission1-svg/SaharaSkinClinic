@@ -406,95 +406,6 @@ function initBookingForm() {
   });
 }
 
-function initMockData() {
-  if (!localStorage.getItem('sahara_bookings')) {
-    const mockBookings = [
-      {
-        id: 'SH-7891',
-        name: 'Devashish Pathak',
-        phone: '9841234567',
-        email: 'devashish@example.com',
-        treatment: 'Laser Treatment',
-        date: new Date(Date.now() + 86400000 * 2).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        notes: 'Interested in laser resurfacing for minor acne scars.',
-        createdAt: new Date(Date.now() - 3600000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Confirmed'
-      },
-      {
-        id: 'SH-4532',
-        name: 'Aayusha Shrestha',
-        phone: '9801122334',
-        email: 'aayusha.s@domain.com',
-        treatment: 'Allergy Test',
-        date: new Date(Date.now() + 86400000 * 4).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        notes: 'Allergy patches for sensitive skin testing.',
-        createdAt: new Date(Date.now() - 3600000 * 12).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Pending'
-      },
-      {
-        id: 'SH-1029',
-        name: 'Rohan Basnet',
-        phone: '9851098765',
-        email: 'rohan.basnet@live.com',
-        treatment: 'PRP Therapy',
-        date: new Date(Date.now() + 86400000 * 1).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        notes: 'PRP session for hair thinning.',
-        createdAt: new Date(Date.now() - 3600000 * 24).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Pending'
-      },
-      {
-        id: 'SH-5561',
-        name: 'Sita Kumari',
-        phone: '9813456789',
-        email: 'sita.k@gmail.com',
-        treatment: 'Chemical Peeling',
-        date: new Date(Date.now() - 86400000 * 3).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        notes: 'Follow-up chemical peeling appointment.',
-        createdAt: new Date(Date.now() - 86400000 * 5).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Completed'
-      }
-    ];
-    localStorage.setItem('sahara_bookings', JSON.stringify(mockBookings));
-  }
-  
-  // Safe Lookup Initializer (Decouples personal info from tracking screen lookup)
-  if (!localStorage.getItem('sahara_public_status')) {
-    const bookings = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
-    const publicRegistry = {};
-    bookings.forEach(b => {
-      publicRegistry[b.id.toUpperCase()] = {
-        status: b.status,
-        treatment: b.treatment,
-        date: b.date
-      };
-    });
-    localStorage.setItem('sahara_public_status', JSON.stringify(publicRegistry));
-  }
-  
-  if (!localStorage.getItem('sahara_messages')) {
-    const mockMessages = [
-      {
-        id: 'MSG-3321',
-        name: 'Hari Prasad',
-        email: 'hari.p@outlook.com',
-        phone: '9841987654',
-        message: 'Hi, do you open on public holidays? I am looking to consult regarding a skin rash.',
-        date: new Date(Date.now() - 3600000 * 4).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Unread'
-      },
-      {
-        id: 'MSG-8841',
-        name: 'Maya Tamang',
-        email: 'maya.t@yahoo.com',
-        phone: '9803112233',
-        message: 'What is the cost of laser hair removal for the full face? Do we need to book multiple sessions?',
-        date: new Date(Date.now() - 86400000 * 2).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Replied'
-      }
-    ];
-    localStorage.setItem('sahara_messages', JSON.stringify(mockMessages));
-  }
-}
 
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -636,7 +547,6 @@ function initStatusTracker() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initMockData();
   renderTreatments();
   initTreatmentModal();
   renderReviews();
