@@ -1303,11 +1303,6 @@
       document.getElementById('dashboard-container').style.display = 'grid';
       document.body.style.alignItems = 'stretch';
       
-      // Clear any existing fake/mock data to ensure only genuine entries
-      localStorage.setItem('sahara_bookings', '[]');
-      localStorage.setItem('sahara_messages', '[]');
-      localStorage.setItem('sahara_public_status', '{}');
-      
       // Load initial databases
       refreshKPIs();
       renderAdminBookings();
