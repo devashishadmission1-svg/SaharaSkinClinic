@@ -1690,7 +1690,7 @@
         time,
         notes: notesValue,
         createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Confirmed' // Walk-in is auto confirmed
+        status: 'Pending' // Walk-in starts as pending, needs confirmation
       };
 
       list.unshift(newBooking);
