@@ -1037,7 +1037,7 @@
                   <th>REF ID</th>
                   <th>Patient Info</th>
                   <th>Treatment Focus</th>
-                  <th>Date & slot</th>
+                  <th>Date</th>
                   <th>Payment</th>
                   <th>Status</th>
                   <th>Action Logs</th>
@@ -1470,10 +1470,7 @@
           </td>
           <td style="font-weight: 550; color: var(--navy-dark);">${b.treatment}</td>
           <td>
-            <div style="display:flex; flex-direction:column; gap:0.1rem">
-              <span style="font-weight:550; font-size:0.85rem">${b.date}</span>
-              <span style="font-size:0.75rem; color:var(--text-muted)">Slot: ${b.time}</span>
-            </div>
+            <span style="font-weight:550; font-size:0.85rem">${b.date}</span>
           </td>
           <td>
             <span style="font-weight: 550; color: var(--navy);">₹${b.payment || '0'}</span>
@@ -1698,7 +1695,6 @@
       const email = document.getElementById('m-email').value;
       const treatment = document.getElementById('m-treatment').value;
       const date = document.getElementById('m-date').value;
-      const time = 'Walk-in';
       const notes = document.getElementById('m-notes').value;
       const payment = document.getElementById('m-payment').value;
 
@@ -1723,7 +1719,6 @@
         email,
         treatment,
         date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time,
         notes: notesValue,
         payment: payment || '0',
         createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
@@ -1790,9 +1785,9 @@
         return;
       }
       
-      let csv = 'Reference ID,Patient Name,Phone,Email,Treatment Focus,Preferred Date,Slot,Status,Submitted At,Notes\n';
+      let csv = 'Reference ID,Patient Name,Phone,Email,Treatment Focus,Preferred Date,Payment,Status,Submitted At,Notes\n';
       bookings.forEach(b => {
-        csv += `"${b.id}","${b.name.replace(/"/g, '""')}","${b.phone}","${b.email}","${b.treatment}","${b.date}","${b.time}","${b.status}","${b.createdAt}","${b.notes.replace(/"/g, '""')}"\n`;
+        csv += `"${b.id}","${b.name.replace(/"/g, '""')}","${b.phone}","${b.email}","${b.treatment}","${b.date}","${b.payment || '0'}","${b.status}","${b.createdAt}","${b.notes.replace(/"/g, '""')}"\n`;
       });
       
       downloadCSVFile(csv, 'Sahara_Consultation_Bookings.csv');
