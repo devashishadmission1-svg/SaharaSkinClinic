@@ -279,11 +279,11 @@
           <form id="booking-form" style="display: flex; flex-direction: column; gap: 1rem;">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div>
-                <label class="form-label" for="booking-name" style="color: rgba(255,255,255,0.85);">Name</label>
+                <label class="form-label" for="booking-name" style="color: rgba(255,255,255,0.85);">Name <span style="color: #FF4444;">*</span></label>
                 <input id="booking-name" type="text" class="form-input" placeholder="Full Name" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy);"/>
               </div>
               <div>
-                <label class="form-label" for="booking-phone" style="color: rgba(255,255,255,0.85);">Phone Number</label>
+                <label class="form-label" for="booking-phone" style="color: rgba(255,255,255,0.85);">Phone Number <span style="color: #FF4444;">*</span></label>
                 <input id="booking-phone" type="tel" class="form-input" placeholder="98XXXXXXXX" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy);"/>
               </div>
             </div>
@@ -294,7 +294,7 @@
             </div>
             
             <div>
-              <label class="form-label" for="booking-treatment" style="color: rgba(255,255,255,0.85);">Select Treatment</label>
+              <label class="form-label" for="booking-treatment" style="color: rgba(255,255,255,0.85);">Select Treatment <span style="color: #FF4444;">*</span></label>
               <select id="booking-treatment" class="form-input" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy); cursor: pointer; height: auto;">
                 <option value="" disabled selected>Choose a treatment...</option>
                 <option value="Laser Treatment">Laser Treatment</option>
@@ -316,7 +316,7 @@
             </div>
             
             <div>
-              <label class="form-label" for="booking-date" style="color: rgba(255,255,255,0.85);">Preferred Date</label>
+              <label class="form-label" for="booking-date" style="color: rgba(255,255,255,0.85);">Preferred Date <span style="color: #FF4444;">*</span></label>
               <input id="booking-date" type="date" class="form-input" required aria-required="true" style="background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); color: var(--navy);"/>
             </div>
             
