@@ -13,6 +13,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;color:var(--navy)}
 .gradient-text{background:linear-gradient(135deg,var(--navy),var(--rose-gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
 section{padding:5rem 0}
+section#hero{padding-top: 0}
 @media(max-width:768px){section{padding:3.5rem 0}}
 
 /* Topbar */
@@ -45,6 +46,7 @@ section{padding:5rem 0}
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-top: 0;
 }
 #hero::before {
   content: '';
