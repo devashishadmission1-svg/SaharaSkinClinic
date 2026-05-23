@@ -1181,8 +1181,8 @@
           </div>
 
           <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label" for="m-email">Email Address</label>
-            <input type="email" id="m-email" class="form-input" placeholder="e.g. ramesh@giri.com" required/>
+            <label class="form-label" for="m-email">Email Address (Optional)</label>
+            <input type="email" id="m-email" class="form-input" placeholder="e.g. ramesh@giri.com"/>
           </div>
 
           <div class="form-group" style="margin-bottom: 0;">
@@ -1420,7 +1420,7 @@
           <td>
             <div class="patient-cell">
               <span class="patient-name">${b.name}</span>
-              <span class="patient-contact">${b.phone} · ${b.email}</span>
+              <span class="patient-contact">${b.phone} · ${b.email || 'N/A'}</span>
               ${b.notes && b.notes !== 'No extra notes.' ? `<span style="font-size:0.75rem; color:#E65100; margin-top:0.25rem; font-style:italic;">Note: "${b.notes}"</span>` : ''}
             </div>
           </td>
@@ -1656,7 +1656,7 @@
       const time = document.getElementById('m-time').value;
       const notes = document.getElementById('m-notes').value || 'Log walk-in patient request.';
 
-      if (!name || !phone || !email || !treatment || !date) {
+      if (!name || !phone || !treatment || !date) {
         alert("Please compile all mandatory fields.");
         return;
       }
