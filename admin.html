@@ -1414,7 +1414,12 @@
       
       // Apply filters
       const filtered = bookings.filter(item => {
-        const matchesSearch = item.name.toLowerCase().includes(searchQuery) || item.phone.includes(searchQuery);
+        // Handle reference ID search - allow search with or without "SH-" prefix
+        const searchId = searchQuery.replace(/^sh-/i, '');
+        const itemId = item.id.replace(/^SH-/i, '');
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery) || 
+                              item.phone.includes(searchQuery) ||
+                              itemId.includes(searchId);
         const matchesTreatment = selectedTreatment === 'ALL' || item.treatment === selectedTreatment;
         const matchesStatus = selectedStatus === 'ALL' || item.status === selectedStatus;
         return matchesSearch && matchesTreatment && matchesStatus;
