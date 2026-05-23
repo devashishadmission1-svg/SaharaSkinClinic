@@ -860,13 +860,15 @@
       .db-table th, .db-table td { padding: 0.5rem; font-size: 0.8rem; }
       .db-table th { white-space: nowrap; }
       .action-icons-wrap { gap: 0.5rem; }
-      .action-icon-btn { width: 32px; height: 32px; }
+      .action-icon-btn { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
       .modal-card { max-width: 95%; margin: 1rem; }
       .modal-body { max-height: 70vh; overflow-y: auto; }
       .form-group { margin-bottom: 0.75rem; }
-      .form-input { font-size: 0.9rem; }
+      .form-input { font-size: 0.9rem; padding: 0.6rem 0.8rem; }
       .modal-footer { flex-direction: column; gap: 0.5rem; }
-      .modal-footer button { width: 100%; }
+      .modal-footer button { width: 100%; min-height: 44px; }
+      .auth-card { max-width: 95%; margin: 1rem; padding: 1.5rem; }
+      .auth-title { font-size: 1.25rem; }
     }
 
     @media (max-width: 480px) {
@@ -878,6 +880,11 @@
       .patient-cell { flex-direction: column; gap: 0.25rem; }
       .patient-name { font-size: 0.9rem; }
       .patient-contact { font-size: 0.75rem; }
+      .action-icon-btn { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
+      .modal-card { max-width: 98%; margin: 0.5rem; }
+      .modal-header { padding: 1rem; }
+      .modal-body { padding: 1rem; }
+      .modal-footer { padding: 1rem; }
     }
   </style>
 </head>

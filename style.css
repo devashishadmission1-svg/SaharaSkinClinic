@@ -35,8 +35,12 @@ section#hero{padding-top: 0}
 /* Mobile menu */
 #mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);background:rgba(248,253,255,.98);backdrop-filter:blur(16px);border-top:1px solid rgba(209,30,105,.15)}
 #mobile-menu.open{max-height:400px}
-#mobile-menu a{display:block;padding:.75rem 1.5rem;font-weight:500;color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(209,30,105,.08);transition:color .2s,background .2s}
+#mobile-menu a{display:block;padding:1rem 1.5rem;font-weight:500;color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(209,30,105,.08);transition:color .2s,background .2s;min-height:48px;align-items:center}
 #mobile-menu a:hover{color:var(--rose-gold-dark);background:var(--cream-dark)}
+@media(max-width:768px){
+  #mobile-menu.open{max-height:500px}
+  #mobile-menu a{padding:1.25rem 1.5rem;font-size:1rem}
+}
 
 /* Hero — editorial split layout */
 #hero {
@@ -350,6 +354,23 @@ footer h3,footer h4{color:#fff}
   /* Floating Buttons */
   #whatsapp-float{width:48px;height:48px;bottom:4rem;right:1rem}
   #back-to-top{width:40px;height:40px;bottom:1rem;right:1rem}
+
+  /* Touch-friendly improvements */
+  a,button{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+  .nav-link,.nav-cta{min-height:auto;min-width:auto}
+  
+  /* Grid layouts */
+  .treatment-grid{grid-template-columns:1fr}
+  
+  /* Images */
+  img{max-width:100%;height:auto}
+
+  /* Booking form improvements */
+  #booking-form{gap:.75rem}
+  .form-group{margin-bottom:.5rem}
+  
+  /* Section spacing */
+  section{padding:3rem 0}
 }
 
 @media(max-width:480px){
@@ -362,6 +383,14 @@ footer h3,footer h4{color:#fff}
   
   /* Map */
   .map-wrap{height:250px}
+
+  /* Extra small touch targets */
+  .social-btn{width:40px;height:40px}
+  #whatsapp-float{width:44px;height:44px}
+  
+  /* Text adjustments */
+  body{font-size:.9rem}
+  .hero-service-line{font-size:.8rem}
 }
 
 /* Table Scroll for Mobile */
