@@ -343,6 +343,18 @@ function initBookingForm() {
     dateInput.value = today;
   }
   
+  // Handle "Others" treatment selection
+  const treatmentSelect = document.getElementById('booking-treatment');
+  const notesField = document.getElementById('booking-notes');
+  if (treatmentSelect && notesField) {
+    treatmentSelect.addEventListener('change', function() {
+      if (this.value === 'Others') {
+        notesField.value = 'Please specify the treatment you need...';
+        notesField.focus();
+      }
+    });
+  }
+  
   form.addEventListener('submit', e => {
     e.preventDefault();
     try {

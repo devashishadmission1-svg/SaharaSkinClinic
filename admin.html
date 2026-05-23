@@ -1628,6 +1628,18 @@
     /* APPOINTMENT BOOKING MODAL ACTIONS */
     function openAddBookingModal() {
       document.getElementById('add-booking-modal').style.display = 'flex';
+      
+      // Handle "Others" treatment selection in admin modal
+      const treatmentSelect = document.getElementById('m-treatment');
+      const notesField = document.getElementById('m-notes');
+      if (treatmentSelect && notesField) {
+        treatmentSelect.addEventListener('change', function() {
+          if (this.value === 'Others') {
+            notesField.value = 'Please specify the treatment you need...';
+            notesField.focus();
+          }
+        });
+      }
     }
 
     function closeAddBookingModal() {
