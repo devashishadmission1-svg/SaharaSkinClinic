@@ -67,10 +67,10 @@ section{padding:5rem 0}
   flex: 1;
   position: relative;
   z-index: 1;
-  padding: 4.5rem 0 3rem;
+  padding: 2.5rem 0 3rem;
 }
 @media(max-width:900px) {
-  .hero-grid { grid-template-columns:1fr; padding:3.5rem 0 2rem; }
+  .hero-grid { grid-template-columns:1fr; padding:1.5rem 0 2rem; }
   .hero-photo-col { display:none; }
 }
 
