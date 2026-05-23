@@ -343,17 +343,26 @@ function initBookingForm() {
     dateInput.value = today;
   }
   
-  // Handle "Others" treatment selection
+  // Toggle notes required when "Others" is selected
   const treatmentSelect = document.getElementById('booking-treatment');
   const notesField = document.getElementById('booking-notes');
-  if (treatmentSelect && notesField) {
-    treatmentSelect.addEventListener('change', function() {
-      if (this.value === 'Others') {
-        notesField.value = 'Please specify the treatment you need...';
-        notesField.focus();
+  const notesLabel = document.getElementById('booking-notes-label');
+  if (treatmentSelect && notesField && notesLabel) {
+    treatmentSelect.addEventListener('change', () => {
+      if (treatmentSelect.value === 'Others') {
+        notesLabel.innerHTML = 'Message/Notes <span style="color: #FF4444;">*</span>';
+        notesField.required = true;
+        notesField.setAttribute('aria-required', 'true');
+        notesField.placeholder = 'Please describe your concern...';
+      } else {
+        notesLabel.innerHTML = 'Message/Notes (Optional)';
+        notesField.required = false;
+        notesField.removeAttribute('aria-required');
+        notesField.placeholder = 'Any specific concerns...';
       }
     });
   }
+
   
   form.addEventListener('submit', e => {
     e.preventDefault();
