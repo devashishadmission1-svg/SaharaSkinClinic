@@ -1207,23 +1207,13 @@
             </select>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem;">
-            <div class="form-group" style="margin-bottom: 0;">
-              <label class="form-label" for="m-date">Preferred Date <span style="color: #FF4444;">*</span></label>
-              <input type="date" id="m-date" class="form-input" required/>
-            </div>
-            <div class="form-group" style="margin-bottom: 0;">
-              <label class="form-label" for="m-time">Preferred Slot</label>
-              <select id="m-time" class="form-input" required>
-                <option value="Morning">Morning</option>
-                <option value="Afternoon" selected>Afternoon</option>
-                <option value="Evening">Evening</option>
-              </select>
-            </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="m-date">Preferred Date <span style="color: #FF4444;">*</span></label>
+            <input type="date" id="m-date" class="form-input" required/>
           </div>
 
           <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label" for="m-notes">Internal Doctor Notes (Optional)</label>
+            <label class="form-label" for="m-notes" id="m-notes-label">Internal Doctor Notes (Optional)</label>
             <textarea id="m-notes" rows="2" class="form-input" placeholder="Warts on cheek, review allergy details..."></textarea>
           </div>
         </form>
@@ -1298,6 +1288,29 @@
       sessionStorage.removeItem('sahara_admin_auth');
       window.location.reload();
     }
+
+    // Toggle required state for doctor notes when Others is selected in walk-in modal
+    window.addEventListener('DOMContentLoaded', () => {
+      const treatmentSelect = document.getElementById('m-treatment');
+      const notesField = document.getElementById('m-notes');
+      const notesLabel = document.getElementById('m-notes-label');
+      if (treatmentSelect && notesField && notesLabel) {
+        treatmentSelect.addEventListener('change', function() {
+          if (this.value === 'Others') {
+            notesLabel.innerHTML = 'Internal Doctor Notes <span style="color: #FF4444;">*</span>';
+            notesField.required = true;
+            notesField.setAttribute('aria-required', 'true');
+            notesField.placeholder = 'Please specify the treatment details...';
+            notesField.focus();
+          } else {
+            notesLabel.innerHTML = 'Internal Doctor Notes (Optional)';
+            notesField.required = false;
+            notesField.removeAttribute('aria-required');
+            notesField.placeholder = 'Warts on cheek, review allergy details...';
+          }
+        });
+      }
+    });
 
     function showDashboard() {
       document.getElementById('auth-container').style.display = 'none';
@@ -1628,23 +1641,20 @@
     /* APPOINTMENT BOOKING MODAL ACTIONS */
     function openAddBookingModal() {
       document.getElementById('add-booking-modal').style.display = 'flex';
-      
-      // Handle "Others" treatment selection in admin modal
-      const treatmentSelect = document.getElementById('m-treatment');
-      const notesField = document.getElementById('m-notes');
-      if (treatmentSelect && notesField) {
-        treatmentSelect.addEventListener('change', function() {
-          if (this.value === 'Others') {
-            notesField.value = 'Please specify the treatment you need...';
-            notesField.focus();
-          }
-        });
-      }
     }
 
     function closeAddBookingModal() {
       document.getElementById('add-booking-modal').style.display = 'none';
       document.getElementById('modal-booking-form').reset();
+      
+      const notesLabel = document.getElementById('m-notes-label');
+      const notesField = document.getElementById('m-notes');
+      if (notesLabel && notesField) {
+        notesLabel.innerHTML = 'Internal Doctor Notes (Optional)';
+        notesField.required = false;
+        notesField.removeAttribute('aria-required');
+        notesField.placeholder = 'Warts on cheek, review allergy details...';
+      }
     }
 
     function submitAddBookingForm() {
@@ -1653,14 +1663,20 @@
       const email = document.getElementById('m-email').value;
       const treatment = document.getElementById('m-treatment').value;
       const date = document.getElementById('m-date').value;
-      const time = document.getElementById('m-time').value;
-      const notes = document.getElementById('m-notes').value || 'Log walk-in patient request.';
+      const time = 'Walk-in';
+      const notes = document.getElementById('m-notes').value;
 
       if (!name || !phone || !treatment || !date) {
         alert("Please compile all mandatory fields.");
         return;
       }
 
+      if (treatment === 'Others' && !notes.trim()) {
+        alert("Please specify the treatment details in Internal Doctor Notes.");
+        return;
+      }
+
+      const notesValue = notes.trim() || 'Log walk-in patient request.';
       const refId = 'SH-' + Math.floor(1000 + Math.random() * 9000);
       const list = JSON.parse(localStorage.getItem('sahara_bookings') || '[]');
       
@@ -1672,7 +1688,7 @@
         treatment,
         date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         time,
-        notes,
+        notes: notesValue,
         createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Confirmed' // Walk-in is auto confirmed
       };
