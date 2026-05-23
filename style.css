@@ -309,3 +309,65 @@ footer h3,footer h4{color:#fff}
 .form-success.show{display:flex}
 .form-error{background:#FEF2F2;border:1.5px solid #FCA5A5;border-radius:10px;padding:1rem;color:#991B1B;font-size:.85rem;display:none;margin-top:.5rem}
 .form-error.show{display:block}
+
+/* Mobile Responsive Improvements */
+@media(max-width:768px){
+  .container{padding:0 1rem}
+  
+  /* Navigation */
+  #main-nav{padding:.5rem 0}
+  .nav-cta{padding:.5rem 1rem;font-size:.8rem}
+  
+  /* Hero */
+  .hero-text-col{padding-right:0;padding:1rem 0}
+  .hero-h1{font-size:2rem}
+  .hero-sub{font-size:.9rem;max-width:100%}
+  .hero-ctas{flex-direction:column;width:100%}
+  .hero-ctas .btn-primary,.hero-ctas .btn-secondary{width:100%;justify-content:center}
+  .hero-stats{flex-wrap:wrap;gap:1rem}
+  .hero-stat-num{font-size:1.3rem}
+  
+  /* Sections */
+  .section-title{font-size:1.8rem}
+  
+  /* Treatment Cards */
+  .treatment-card{padding:1.25rem}
+  .card-icon{width:44px;height:44px}
+  
+  /* About Section */
+  .doctor-photo-wrap{max-width:100%;margin:0 auto}
+  
+  /* Contact Section */
+  .contact-card{flex-direction:column;padding:1rem}
+  .contact-icon{width:36px;height:36px}
+  
+  /* Forms */
+  .form-input{font-size:.85rem;padding:.65rem .85rem}
+  
+  /* Footer */
+  footer{padding:3rem 0 2rem}
+  
+  /* Floating Buttons */
+  #whatsapp-float{width:48px;height:48px;bottom:4rem;right:1rem}
+  #back-to-top{width:40px;height:40px;bottom:1rem;right:1rem}
+}
+
+@media(max-width:480px){
+  .hero-h1{font-size:1.6rem}
+  .hero-sub{font-size:.85rem}
+  .hero-kicker{font-size:.65rem}
+  .section-title{font-size:1.5rem}
+  .treatment-card{padding:1rem}
+  .btn-primary,.btn-secondary{padding:.65rem 1.5rem;font-size:.85rem}
+  
+  /* Map */
+  .map-wrap{height:250px}
+}
+
+/* Table Scroll for Mobile */
+@media(max-width:768px){
+  .db-table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .db-table{min-width:800px}
+  .db-table th,.db-table td{padding:.5rem;font-size:.8rem}
+  .db-table th{white-space:nowrap}
+}
