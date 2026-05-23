@@ -386,6 +386,7 @@ function initBookingForm() {
         date: new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
 
         notes,
+        payment: '0',
         createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'Pending'
       };
