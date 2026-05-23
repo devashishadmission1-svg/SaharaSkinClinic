@@ -1722,7 +1722,7 @@
         notes: notesValue,
         payment: payment || '0',
         createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        status: 'Pending' // Walk-in starts as pending, needs confirmation
+        status: 'Completed' // Walk-in is automatically completed since patient is present and has paid
       };
 
       list.unshift(newBooking);
