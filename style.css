@@ -81,6 +81,32 @@ section#hero{padding-top: 0}
 }
 
 .hero-text-col { padding-right: 3rem; }
+
+/* Hero mobile improvements */
+@media(max-width:768px){
+  #hero{min-height:auto;padding:4rem 0 6rem}
+  .hero-grid{padding:1rem 0 2rem}
+  .hero-text-col{padding-right:0;padding:0 1rem}
+  .hero-orb-1{width:400px;height:400px;top:-10%;right:-20%}
+  .hero-orb-2{width:300px;height:300px;bottom:-10%;left:-15%}
+  .hero-kicker{margin-bottom:1rem}
+  .hero-sub{margin-bottom:1.5rem}
+  .hero-ctas{margin-bottom:2rem}
+  .hero-stats{padding-top:1rem}
+  .hero-marquee-strip{padding:.5rem 0}
+}
+
+@media(max-width:480px){
+  #hero{padding:3rem 0 5rem}
+  .hero-grid{padding:0.5rem 0 1.5rem}
+  .hero-text-col{padding:0 0.5rem}
+  .hero-orb-1{width:300px;height:300px;top:-5%;right:-30%}
+  .hero-orb-2{width:250px;height:250px;bottom:-5%;left:-20%}
+  .hero-kicker{margin-bottom:0.75rem}
+  .hero-sub{margin-bottom:1.25rem}
+  .hero-ctas{margin-bottom:1.5rem}
+  .hero-stats{gap:0.75rem;padding-top:0.75rem}
+}
 .hero-kicker {
   font-family: 'Inter', sans-serif;
   font-size: .72rem;
