@@ -850,41 +850,42 @@
     @media (max-width: 768px) {
       #dashboard-container { grid-template-columns: 1fr; }
       .sidebar { display: none; } /* On mobile, we can toggle or default to main panel */
-      .kpi-grid { grid-template-columns: 1fr; }
-      .panel-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .panel-header h2 { font-size: 1.25rem; }
-      .filter-bar { flex-direction: column; gap: 0.75rem; }
-      .filter-bar input, .filter-bar select { width: 100%; }
+      .kpi-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .kpi-card { padding: 1.25rem; }
+      .panel-header { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+      .panel-header h2 { font-size: 1.35rem; }
+      .filter-bar { flex-direction: column; gap: 0.875rem; }
+      .filter-bar input, .filter-bar select { width: 100%; padding: 0.75rem 1rem; font-size: 0.95rem; }
       .db-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .db-table { min-width: 800px; }
-      .db-table th, .db-table td { padding: 0.5rem; font-size: 0.8rem; }
+      .db-table th, .db-table td { padding: 0.625rem; font-size: 0.85rem; }
       .db-table th { white-space: nowrap; }
-      .action-icons-wrap { gap: 0.5rem; }
-      .action-icon-btn { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
-      .modal-card { max-width: 95%; margin: 1rem; }
+      .action-icons-wrap { gap: 0.625rem; }
+      .action-icon-btn { width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
+      .modal-card { max-width: 95%; margin: 1.25rem; }
       .modal-body { max-height: 70vh; overflow-y: auto; }
-      .form-group { margin-bottom: 0.75rem; }
-      .form-input { font-size: 0.9rem; padding: 0.6rem 0.8rem; }
-      .modal-footer { flex-direction: column; gap: 0.5rem; }
-      .modal-footer button { width: 100%; min-height: 44px; }
-      .auth-card { max-width: 95%; margin: 1rem; padding: 1.5rem; }
-      .auth-title { font-size: 1.25rem; }
+      .form-group { margin-bottom: 0.875rem; }
+      .form-input { font-size: 0.95rem; padding: 0.75rem 1rem; }
+      .modal-footer { flex-direction: column; gap: 0.625rem; }
+      .modal-footer button { width: 100%; min-height: 48px; padding: 0.875rem 1.5rem; }
+      .auth-card { max-width: 95%; margin: 1.25rem; padding: 1.75rem; }
+      .auth-title { font-size: 1.35rem; }
     }
 
     @media (max-width: 480px) {
-      .kpi-card { padding: 1rem; }
-      .kpi-value { font-size: 1.5rem; }
-      .kpi-label { font-size: 0.75rem; }
-      .panel-header h2 { font-size: 1.1rem; }
-      .db-table th, .db-table td { padding: 0.4rem; font-size: 0.75rem; }
-      .patient-cell { flex-direction: column; gap: 0.25rem; }
-      .patient-name { font-size: 0.9rem; }
-      .patient-contact { font-size: 0.75rem; }
-      .action-icon-btn { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
-      .modal-card { max-width: 98%; margin: 0.5rem; }
-      .modal-header { padding: 1rem; }
-      .modal-body { padding: 1rem; }
-      .modal-footer { padding: 1rem; }
+      .kpi-card { padding: 1.125rem; }
+      .kpi-value { font-size: 1.625rem; }
+      .kpi-label { font-size: 0.8rem; }
+      .panel-header h2 { font-size: 1.2rem; }
+      .db-table th, .db-table td { padding: 0.5rem; font-size: 0.8rem; }
+      .patient-cell { flex-direction: column; gap: 0.375rem; }
+      .patient-name { font-size: 0.95rem; }
+      .patient-contact { font-size: 0.8rem; }
+      .action-icon-btn { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
+      .modal-card { max-width: 98%; margin: 0.75rem; }
+      .modal-header { padding: 1.125rem; }
+      .modal-body { padding: 1.125rem; }
+      .modal-footer { padding: 1.125rem; }
     }
   </style>
 </head>

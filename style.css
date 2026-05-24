@@ -84,28 +84,28 @@ section#hero{padding-top: 0}
 
 /* Hero mobile improvements */
 @media(max-width:768px){
-  #hero{min-height:auto;padding:4rem 0 6rem}
-  .hero-grid{padding:1rem 0 2rem}
-  .hero-text-col{padding-right:0;padding:0 1rem}
-  .hero-orb-1{width:400px;height:400px;top:-10%;right:-20%}
-  .hero-orb-2{width:300px;height:300px;bottom:-10%;left:-15%}
-  .hero-kicker{margin-bottom:1rem}
-  .hero-sub{margin-bottom:1.5rem}
-  .hero-ctas{margin-bottom:2rem}
-  .hero-stats{padding-top:1rem}
-  .hero-marquee-strip{padding:.5rem 0}
+  #hero{min-height:auto;padding:5rem 0 7rem}
+  .hero-grid{padding:1.5rem 0 2.5rem}
+  .hero-text-col{padding-right:0;padding:0 0.5rem}
+  .hero-orb-1{width:450px;height:450px;top:-15%;right:-25%}
+  .hero-orb-2{width:350px;height:350px;bottom:-15%;left:-20%}
+  .hero-kicker{margin-bottom:1.25rem}
+  .hero-sub{margin-bottom:1.75rem}
+  .hero-ctas{margin-bottom:2.25rem}
+  .hero-stats{padding-top:1.25rem}
+  .hero-marquee-strip{padding:.6rem 0}
 }
 
 @media(max-width:480px){
-  #hero{padding:3rem 0 5rem}
-  .hero-grid{padding:0.5rem 0 1.5rem}
-  .hero-text-col{padding:0 0.5rem}
-  .hero-orb-1{width:300px;height:300px;top:-5%;right:-30%}
-  .hero-orb-2{width:250px;height:250px;bottom:-5%;left:-20%}
-  .hero-kicker{margin-bottom:0.75rem}
-  .hero-sub{margin-bottom:1.25rem}
-  .hero-ctas{margin-bottom:1.5rem}
-  .hero-stats{gap:0.75rem;padding-top:0.75rem}
+  #hero{padding:4rem 0 6rem}
+  .hero-grid{padding:1rem 0 2rem}
+  .hero-text-col{padding:0 0.25rem}
+  .hero-orb-1{width:350px;height:350px;top:-10%;right:-35%}
+  .hero-orb-2{width:280px;height:280px;bottom:-10%;left:-25%}
+  .hero-kicker{margin-bottom:1rem}
+  .hero-sub{margin-bottom:1.5rem}
+  .hero-ctas{margin-bottom:1.75rem}
+  .hero-stats{gap:1rem;padding-top:1rem}
 }
 .hero-kicker {
   font-family: 'Inter', sans-serif;
@@ -342,81 +342,88 @@ footer h3,footer h4{color:#fff}
 
 /* Mobile Responsive Improvements */
 @media(max-width:768px){
-  .container{padding:0 1rem}
+  .container{padding:0 1.25rem}
   
   /* Navigation */
-  #main-nav{padding:.5rem 0}
-  .nav-cta{padding:.5rem 1rem;font-size:.8rem}
+  #main-nav{padding:.75rem 0}
+  .nav-cta{padding:.6rem 1.25rem;font-size:.85rem}
   
   /* Hero */
-  .hero-text-col{padding-right:0;padding:1rem 0}
-  .hero-h1{font-size:2rem}
-  .hero-sub{font-size:.9rem;max-width:100%}
-  .hero-ctas{flex-direction:column;width:100%}
-  .hero-ctas .btn-primary,.hero-ctas .btn-secondary{width:100%;justify-content:center}
-  .hero-stats{flex-wrap:wrap;gap:1rem}
-  .hero-stat-num{font-size:1.3rem}
+  .hero-text-col{padding-right:0;padding:1.25rem 0}
+  .hero-h1{font-size:2.25rem;line-height:1.15}
+  .hero-sub{font-size:.95rem;max-width:100%;line-height:1.6}
+  .hero-ctas{flex-direction:column;width:100%;gap:.75rem}
+  .hero-ctas .btn-primary,.hero-ctas .btn-secondary{width:100%;justify-content:center;padding:.85rem 1.5rem}
+  .hero-stats{flex-wrap:wrap;gap:1.25rem}
+  .hero-stat-num{font-size:1.5rem}
   
   /* Sections */
-  .section-title{font-size:1.8rem}
+  .section-title{font-size:2rem;line-height:1.2}
   
   /* Treatment Cards */
-  .treatment-card{padding:1.25rem}
-  .card-icon{width:44px;height:44px}
+  .treatment-card{padding:1.5rem}
+  .card-icon{width:48px;height:48px}
   
   /* About Section */
   .doctor-photo-wrap{max-width:100%;margin:0 auto}
   
   /* Contact Section */
-  .contact-card{flex-direction:column;padding:1rem}
-  .contact-icon{width:36px;height:36px}
+  .contact-card{flex-direction:column;padding:1.25rem}
+  .contact-icon{width:40px;height:40px}
   
   /* Forms */
-  .form-input{font-size:.85rem;padding:.65rem .85rem}
+  .form-input{font-size:.9rem;padding:.75rem 1rem}
   
   /* Footer */
-  footer{padding:3rem 0 2rem}
+  footer{padding:3.5rem 0 2.5rem}
   
   /* Floating Buttons */
-  #whatsapp-float{width:48px;height:48px;bottom:4rem;right:1rem}
-  #back-to-top{width:40px;height:40px;bottom:1rem;right:1rem}
+  #whatsapp-float{width:52px;height:52px;bottom:4.5rem;right:1.25rem}
+  #back-to-top{width:44px;height:44px;bottom:1.25rem;right:1.25rem}
 
   /* Touch-friendly improvements */
-  a,button{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+  a,button{min-height:48px;min-width:48px;display:inline-flex;align-items:center;justify-content:center}
   .nav-link,.nav-cta{min-height:auto;min-width:auto}
   
   /* Grid layouts */
-  .treatment-grid{grid-template-columns:1fr}
+  .treatment-grid{grid-template-columns:1fr;gap:1rem}
   
   /* Images */
   img{max-width:100%;height:auto}
 
   /* Booking form improvements */
-  #booking-form{gap:.75rem}
-  .form-group{margin-bottom:.5rem}
+  #booking-form{gap:1rem}
+  .form-group{margin-bottom:.75rem}
   
   /* Section spacing */
-  section{padding:3rem 0}
+  section{padding:4rem 0}
 }
 
 @media(max-width:480px){
-  .hero-h1{font-size:1.6rem}
-  .hero-sub{font-size:.85rem}
-  .hero-kicker{font-size:.65rem}
-  .section-title{font-size:1.5rem}
-  .treatment-card{padding:1rem}
-  .btn-primary,.btn-secondary{padding:.65rem 1.5rem;font-size:.85rem}
+  .container{padding:0 1rem}
+  .hero-h1{font-size:1.85rem;line-height:1.15}
+  .hero-sub{font-size:.9rem;line-height:1.55}
+  .hero-kicker{font-size:.68rem}
+  .section-title{font-size:1.75rem;line-height:1.2}
+  .treatment-card{padding:1.25rem}
+  .btn-primary,.btn-secondary{padding:.75rem 1.5rem;font-size:.9rem}
   
   /* Map */
-  .map-wrap{height:250px}
+  .map-wrap{height:280px}
 
   /* Extra small touch targets */
-  .social-btn{width:40px;height:40px}
-  #whatsapp-float{width:44px;height:44px}
+  .social-btn{width:42px;height:42px}
+  #whatsapp-float{width:48px;height:48px}
   
   /* Text adjustments */
-  body{font-size:.9rem}
-  .hero-service-line{font-size:.8rem}
+  body{font-size:.95rem;line-height:1.6}
+  .hero-service-line{font-size:.85rem}
+  
+  /* Section spacing */
+  section{padding:3.5rem 0}
+  
+  /* Grid gap */
+  .treatment-grid{gap:.75rem}
 }
 
 /* Table Scroll for Mobile */
