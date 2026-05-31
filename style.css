@@ -73,7 +73,7 @@ section#hero{padding-top: 0}
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0;
   align-items: center;
   flex: 1;
@@ -83,12 +83,8 @@ section#hero{padding-top: 0}
   transform-style: preserve-3d;
   perspective: 1000px;
 }
-@media(max-width:900px) {
-  .hero-grid { grid-template-columns:1fr; padding:1.5rem 0 2rem; }
-  .hero-photo-col { display:none; }
-}
-
-.hero-text-col { padding-right: 3rem; transform: translateZ(20px); }
+.hero-photo-col { display:none; }
+.hero-text-col { padding-right: 0; max-width: 800px; margin: 0 auto; transform: translateZ(20px); }
 
 /* Hero mobile improvements */
 @media(max-width:768px){
@@ -117,15 +113,15 @@ section#hero{padding-top: 0}
 }
 .hero-kicker {
   font-family: 'Raleway', sans-serif;
-  font-size: .72rem;
+  font-size: .85rem;
   font-weight: 700;
-  letter-spacing: .18em;
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--rose-gold);
   display: flex;
   align-items: center;
   gap: .75rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
   animation: slide-in-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
   transform: translateX(-30px);
@@ -142,12 +138,12 @@ section#hero{padding-top: 0}
 }
 .hero-h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 700;
   color: #fff;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -.02em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   animation: kinetic-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
   transform: translateY(40px) rotateX(-10deg);
@@ -160,11 +156,11 @@ section#hero{padding-top: 0}
 }
 .hero-sub {
   font-family: 'Raleway', sans-serif;
-  font-size: 1rem;
-  color: rgba(255,255,255,.6);
-  line-height: 1.75;
-  max-width: 420px;
-  margin-bottom: 2rem;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,.7);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 2.5rem;
   animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
   opacity: 0;
   transform: translateY(20px);
