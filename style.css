@@ -292,7 +292,7 @@ section#hero{padding-top: 0}
 }
 .hero-name-card {
   position: absolute;
-  bottom: -1.5rem;
+  top: -1.5rem;
   left: -2rem;
   background: var(--rose-gold);
   color: white;
