@@ -48,7 +48,10 @@ section#hero{padding-top: 0}
 
 /* Hero — editorial split layout */
 #hero {
-  background: var(--navy);
+  background: linear-gradient(135deg, rgba(0,132,180,.85), rgba(58,190,249,.75)), url('8201973.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
