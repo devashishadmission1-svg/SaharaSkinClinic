@@ -230,29 +230,98 @@ async function getGeminiResponse(userMessage) {
 function getFallbackResponse(message) {
   const lowerMessage = message.toLowerCase();
   
-  if (lowerMessage.includes('treatment') || lowerMessage.includes('service')) {
-    return 'We offer various treatments including Laser Treatment, Hair Transplant, Botox and Fillers, Chemical Peeling, PRP Therapy, and more. Would you like details about any specific treatment?';
+  // Check for treatment-related keywords with common misspellings
+  const treatmentKeywords = ['treatment', 'service', 'therapy', 'procedure', 'laser', 'hair', 'transplant', 'botox', 'filler', 'chemical', 'peel', 'prp', 'cryotherapy', 'cryo', 'cyrotherapy', 'mole', 'allergy', 'skin', 'acne', 'eczema', 'psoriasis', 'vitiligo', 'wrinkle', 'scar', 'pigment'];
+  if (treatmentKeywords.some(keyword => lowerMessage.includes(keyword) || isSimilar(lowerMessage, keyword))) {
+    return 'We offer various treatments including Laser Treatment, Hair Transplant, Botox and Fillers, Chemical Peeling, PRP Therapy, Cryotherapy, and more. Would you like details about any specific treatment?';
   }
   
-  if (lowerMessage.includes('appointment') || lowerMessage.includes('book') || lowerMessage.includes('consultation')) {
+  // Check for appointment/booking keywords with common misspellings
+  const appointmentKeywords = ['appointment', 'book', 'consultation', 'schedule', 'reserve', 'booking', 'apointment', 'consult'];
+  if (appointmentKeywords.some(keyword => lowerMessage.includes(keyword) || isSimilar(lowerMessage, keyword))) {
     return 'You can book an appointment through our website\'s appointment section or contact us directly. We also offer teledermatology consultations for remote patients.';
   }
   
-  if (lowerMessage.includes('doctor') || lowerMessage.includes('dr.') || lowerMessage.includes('prabin')) {
+  // Check for doctor-related keywords with common misspellings
+  const doctorKeywords = ['doctor', 'dr.', 'dr', 'prabin', 'dhakal', 'physician', 'specialist', 'dermatologist'];
+  if (doctorKeywords.some(keyword => lowerMessage.includes(keyword) || isSimilar(lowerMessage, keyword))) {
     return 'Dr. Prabin Dhakal is our HOD of Dermatology with MBBS from KU and MD Dermatovenereology from IOM, TUTH. He has a fellowship in Laser & Aesthetic Surgery from Delhi (2020) and 6+ years of clinical experience.';
   }
   
-  if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('fee')) {
+  // Check for pricing keywords with common misspellings
+  const priceKeywords = ['price', 'cost', 'fee', 'charge', 'rate', 'pricing', 'expensive', 'cheap', 'affordable'];
+  if (priceKeywords.some(keyword => lowerMessage.includes(keyword) || isSimilar(lowerMessage, keyword))) {
     return 'Treatment prices vary depending on the procedure and individual needs. Please book a consultation for accurate pricing information.';
   }
   
-  if (lowerMessage.includes('location') || lowerMessage.includes('address') || lowerMessage.includes('where')) {
+  // Check for location keywords with common misspellings
+  const locationKeywords = ['location', 'address', 'where', 'located', 'place', 'area', 'kalanki', 'kathmandu', 'nepal'];
+  if (locationKeywords.some(keyword => lowerMessage.includes(keyword) || isSimilar(lowerMessage, keyword))) {
     return 'Sahara Skin Clinic is located in Kalanki, Kathmandu, Nepal.';
   }
   
-  if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email')) {
+  // Check for contact keywords with common misspellings
+  const contactKeywords = ['contact', 'phone', 'email', 'call', 'number', 'reach', 'communicate', 'message'];
+  if (contactKeywords.some(keyword => lowerMessage.includes(keyword) || isSimilar(lowerMessage, keyword))) {
     return 'You can contact us through our website or visit our clinic in Kalanki, Kathmandu. Our contact details are available on the website.';
   }
   
+  // Check for timing/hours keywords
+  const timingKeywords = ['time', 'hour', 'open', 'close', 'timing', 'schedule', 'when', 'available'];
+  if (timingKeywords.some(keyword => lowerMessage.includes(keyword) || isSimilar(lowerMessage, keyword))) {
+    return 'Please contact us directly for our clinic hours and availability. We recommend booking an appointment for the best experience.';
+  }
+  
   return 'I apologize, but I\'m having trouble connecting to our AI service right now. For detailed information about our treatments and services, please book a consultation with Dr. Prabin Dhakal or contact us directly. You can also explore our treatment options on the website.';
+}
+
+// Simple similarity check for handling typos
+function isSimilar(text, keyword) {
+  // Check if the keyword is a substring of the text
+  if (text.includes(keyword)) return true;
+  
+  // Check for common typos by removing vowels and comparing
+  const textNoVowels = text.replace(/[aeiou]/g, '');
+  const keywordNoVowels = keyword.replace(/[aeiou]/g, '');
+  
+  if (textNoVowels.includes(keywordNoVowels) && keyword.length > 3) return true;
+  
+  // Check for partial matches (at least 60% of characters match)
+  const textWords = text.split(/\s+/);
+  for (const word of textWords) {
+    if (word.length >= 4) {
+      const similarity = calculateSimilarity(word, keyword);
+      if (similarity > 0.6) return true;
+    }
+  }
+  
+  return false;
+}
+
+// Calculate similarity between two strings (Levenshtein distance-based)
+function calculateSimilarity(str1, str2) {
+  const longer = str1.length > str2.length ? str1 : str2;
+  const shorter = str1.length > str2.length ? str2 : str1;
+  
+  if (longer.length === 0) return 1.0;
+  
+  const costs = [];
+  for (let i = 0; i <= longer.length; i++) {
+    let lastValue = i;
+    for (let j = 0; j <= shorter.length; j++) {
+      if (i === 0) {
+        costs[j] = j;
+      } else if (j > 0) {
+        let newValue = costs[j - 1];
+        if (longer.charAt(i - 1) !== shorter.charAt(j - 1)) {
+          newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+        }
+        costs[j - 1] = lastValue;
+        lastValue = newValue;
+      }
+    }
+    if (i > 0) costs[shorter.length] = lastValue;
+  }
+  
+  return 1 - (costs[shorter.length] / longer.length);
 }
