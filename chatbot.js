@@ -117,8 +117,8 @@ async function sendMessage() {
     addMessage(response, 'bot');
   } catch (error) {
     removeTypingIndicator();
+    console.error('Chatbot error details:', error);
     addMessage('I apologize, but I\'m having trouble connecting right now. Please try again later or contact us directly for assistance.', 'bot');
-    console.error('Chatbot error:', error);
   }
 
   chatbotSend.disabled = false;
@@ -181,38 +181,78 @@ async function getGeminiResponse(userMessage) {
     conversationHistory = conversationHistory.slice(-10);
   }
 
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: conversationHistory,
-        systemInstruction: {
-          parts: [{ text: CLINIC_CONTEXT }]
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 500,
-        }
-      })
+        body: JSON.stringify({
+          contents: conversationHistory,
+          systemInstruction: {
+            parts: [{ text: CLINIC_CONTEXT }]
+          },
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 500,
+          }
+        })
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error('API Error Response:', errorData);
+      console.error('API Status:', response.status);
+      throw new Error(`API Error: ${response.status} - ${errorData}`);
     }
-  );
 
-  if (!response.ok) {
-    throw new Error('Failed to get response from Gemini API');
+    const data = await response.json();
+    const botResponse = data.candidates[0].content.parts[0].text;
+
+    // Add bot response to conversation history
+    conversationHistory.push({
+      role: 'model',
+      parts: [{ text: botResponse }]
+    });
+
+    return botResponse;
+  } catch (error) {
+    console.error('Detailed error:', error);
+    // Fallback to simple responses based on keywords if API fails
+    return getFallbackResponse(userMessage);
   }
+}
 
-  const data = await response.json();
-  const botResponse = data.candidates[0].content.parts[0].text;
-
-  // Add bot response to conversation history
-  conversationHistory.push({
-    role: 'model',
-    parts: [{ text: botResponse }]
-  });
-
-  return botResponse;
+// Fallback responses when API is unavailable
+function getFallbackResponse(message) {
+  const lowerMessage = message.toLowerCase();
+  
+  if (lowerMessage.includes('treatment') || lowerMessage.includes('service')) {
+    return 'We offer various treatments including Laser Treatment, Hair Transplant, Botox and Fillers, Chemical Peeling, PRP Therapy, and more. Would you like details about any specific treatment?';
+  }
+  
+  if (lowerMessage.includes('appointment') || lowerMessage.includes('book') || lowerMessage.includes('consultation')) {
+    return 'You can book an appointment through our website\'s appointment section or contact us directly. We also offer teledermatology consultations for remote patients.';
+  }
+  
+  if (lowerMessage.includes('doctor') || lowerMessage.includes('dr.') || lowerMessage.includes('prabin')) {
+    return 'Dr. Prabin Dhakal is our HOD of Dermatology with MBBS from KU and MD Dermatovenereology from IOM, TUTH. He has a fellowship in Laser & Aesthetic Surgery from Delhi (2020) and 6+ years of clinical experience.';
+  }
+  
+  if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('fee')) {
+    return 'Treatment prices vary depending on the procedure and individual needs. Please book a consultation for accurate pricing information.';
+  }
+  
+  if (lowerMessage.includes('location') || lowerMessage.includes('address') || lowerMessage.includes('where')) {
+    return 'Sahara Skin Clinic is located in Kalanki, Kathmandu, Nepal.';
+  }
+  
+  if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email')) {
+    return 'You can contact us through our website or visit our clinic in Kalanki, Kathmandu. Our contact details are available on the website.';
+  }
+  
+  return 'I apologize, but I\'m having trouble connecting to our AI service right now. For detailed information about our treatments and services, please book a consultation with Dr. Prabin Dhakal or contact us directly. You can also explore our treatment options on the website.';
 }
